@@ -41,6 +41,8 @@ public:
 
 	void onWell(Entity&, Tile&) {
 		if (drinking == false) {
+			drinking = true;
+
 			wellTimer.reset();
 			wellTimer.setRunning(true);
 
