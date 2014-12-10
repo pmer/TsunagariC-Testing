@@ -1,11 +1,11 @@
 include ../TsunagariC/src/Makefile.common
 
-OBJECTS = main.o
-WORLDOBJECTS = ../../src/main.o
+OBJECTS = world.o
+WORLDOBJECTS = ../../src/world.o
 
-all: ../TsunagariC/src/tsunagari
+all: tsunagari
 
-../TsunagariC/src/tsunagari: $(OBJECTS) ../TsunagariC/src/*.o
+tsunagari: $(OBJECTS)
 	(cd ../TsunagariC/src; $(MAKE) -f Makefile WORLDOBJECTS="$(WORLDOBJECTS)")
 
 clean:
