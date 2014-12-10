@@ -7,8 +7,6 @@ class grove01 : public DataArea
 {
 	bool drinking = false;
 	Timer wellTimer;
-	static constexpr double duration = 1.0;
-	static constexpr int maxAlpha = 192;
 
 public:
 	grove01() {
@@ -21,6 +19,9 @@ public:
 	}
 
 	void onTick() {
+		static constexpr double duration = 1.0;
+		static constexpr int maxAlpha = 192;
+
 		if (drinking == true) {
 			int overlayAlpha;
 
