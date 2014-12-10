@@ -1,0 +1,3 @@
+[submodule "TsunagariC"]
+	path = TsunagariC
+	url = https://github.com/pariahsoft/TsunagariC.git
