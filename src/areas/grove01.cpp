@@ -30,13 +30,15 @@ public:
 			if (progress < 0.5)
 				overlayAlpha = int(2 * maxAlpha * progress);
 			else if (progress < 1.0)
-				overlayAlpha = int(2 * maxAlpha * (1 - progress));
+				overlayAlpha = int(2 * maxAlpha *
+					(1 - progress));
 			else {
 				overlayAlpha = 0;
 				drinking = false;
 			}
 
-			area->setColorOverlay(255, 255, 255, overlayAlpha); // white overlay
+			// white overlay
+			area->setColorOverlay(overlayAlpha, 255, 255, 255);
 		}
 	}
 
@@ -47,7 +49,8 @@ public:
 			wellTimer.reset();
 			wellTimer.setRunning(true);
 
-			auto splash = SoundManager::instance().play("sounds/splash.oga");
+			auto& sound = SoundManager::instance();
+			auto splash = sound.play("sounds/splash.oga");
 			splash->setSpeed(1.0 + randFloat(-0.1, 0.1));
 		}
 	}
