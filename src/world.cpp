@@ -28,6 +28,7 @@
 
 #include "../TsunagariC/src/log.h"
 
+#include "areas/grove_house.cpp"
 #include "areas/grove01.cpp"
 #include "areas/grove02.cpp"
 #include "world.h"
@@ -43,6 +44,7 @@ DataWorld& DataWorld::instance()
 
 TestingDataWorld::TestingDataWorld()
 {
+	areas["areas/grove_house.tmx"] = DataAreaRef(new grove_house());
 	areas["areas/grove01.tmx"] = DataAreaRef(new grove01());
 	areas["areas/grove02.tmx"] = DataAreaRef(new grove02());
 }

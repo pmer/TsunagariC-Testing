@@ -24,14 +24,13 @@ public:
 		static constexpr int maxAlpha = 192;
 
 		if (drinking == true) {
-			int overlayAlpha;
+			unsigned char overlayAlpha;
 
 			double progress = wellTimer.count() / duration;
 			if (progress < 0.5)
-				overlayAlpha = int(2 * maxAlpha * progress);
+				overlayAlpha = (unsigned char)(2 * maxAlpha * progress);
 			else if (progress < 1.0)
-				overlayAlpha = int(2 * maxAlpha *
-					(1 - progress));
+				overlayAlpha = (unsigned char)(2 * maxAlpha * (1 - progress));
 			else {
 				overlayAlpha = 0;
 				drinking = false;
