@@ -42,7 +42,7 @@ DataWorld& DataWorld::instance()
 
 TestingDataWorld::TestingDataWorld()
 {
-	areas["grove01"] = DataAreaRef(new grove01());
+	areas["areas/grove01.tmx"] = DataAreaRef(new grove01());
 }
 
 TestingDataWorld::~TestingDataWorld()
