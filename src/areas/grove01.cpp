@@ -1,6 +1,7 @@
 #include "../../TsunagariC/src/area.h"
 #include "../../TsunagariC/src/random.h"
 #include "../../TsunagariC/src/timer.h"
+
 #include "../../TsunagariC/src/data/area.h"
 
 class grove01 : public DataArea
