@@ -28,9 +28,11 @@
 
 #include "../TsunagariC/src/log.h"
 
+#include "areas/cave01.cpp"
 #include "areas/grove_house.cpp"
 #include "areas/grove01.cpp"
 #include "areas/grove02.cpp"
+#include "areas/secret_room.cpp"
 #include "world.h"
 
 
@@ -44,9 +46,11 @@ DataWorld& DataWorld::instance()
 
 TestingDataWorld::TestingDataWorld()
 {
+	areas["areas/cave01.tmx"] = DataAreaRef(new cave01());
 	areas["areas/grove_house.tmx"] = DataAreaRef(new grove_house());
 	areas["areas/grove01.tmx"] = DataAreaRef(new grove01());
 	areas["areas/grove02.tmx"] = DataAreaRef(new grove02());
+	areas["areas/secret_room.tmx"] = DataAreaRef(new secret_room());
 }
 
 TestingDataWorld::~TestingDataWorld()
