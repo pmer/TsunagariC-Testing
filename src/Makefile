@@ -5,7 +5,7 @@ WORLDOBJECTS = ../../src/main.o
 
 all: ../TsunagariC/src/tsunagari
 
-../TsunagariC/src/tsunagari: $(OBJECTS)
+../TsunagariC/src/tsunagari: $(OBJECTS) ../TsunagariC/src/*.o
 	(cd ../TsunagariC/src; $(MAKE) -f Makefile WORLDOBJECTS="$(WORLDOBJECTS)")
 
 clean:
