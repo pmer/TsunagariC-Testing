@@ -26,9 +26,10 @@
 
 #include <iostream>
 
-#include "world.h"
-
 #include "../TsunagariC/src/log.h"
+
+#include "areas/grove01.cpp"
+#include "world.h"
 
 
 static TestingDataWorld globalTestingDataWorld;
@@ -41,6 +42,7 @@ DataWorld& DataWorld::instance()
 
 TestingDataWorld::TestingDataWorld()
 {
+	areas["grove01"] = DataAreaRef(new grove01());
 }
 
 TestingDataWorld::~TestingDataWorld()
