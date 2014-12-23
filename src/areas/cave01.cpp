@@ -27,7 +27,7 @@ public:
 		}
 	}
 
-	void onTick() {
+	void onTick(time_t) {
 		switch (fallStage) {
 		case 0:
 			if (!fallSnd->isPlaying()) {

@@ -1,6 +1,7 @@
 #include "../../TsunagariC/src/area.h"
 #include "../../TsunagariC/src/log.h"
 #include "../../TsunagariC/src/music.h"
+#include "../../TsunagariC/src/random.h"
 
 #include "../../TsunagariC/src/data/area.h"
 

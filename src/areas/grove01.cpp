@@ -19,7 +19,7 @@ public:
 		cloud->move(-400, 0);
 	}
 
-	void onTick() {
+	void onTick(time_t) {
 		static constexpr double duration = 1.0;
 		static constexpr int maxAlpha = 192;
 
