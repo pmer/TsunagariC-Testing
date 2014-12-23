@@ -19,29 +19,9 @@ public:
 		cloud->move(-400, 0);
 	}
 
-	void onTick(time_t) {
-		static constexpr double duration = 1.0;
+	void onWell(Entity&, Tile&) {
 		static constexpr int maxAlpha = 192;
 
-		if (drinking == true) {
-			unsigned char overlayAlpha;
-
-			double progress = wellTimer.count() / duration;
-			if (progress < 0.5)
-				overlayAlpha = (unsigned char)(2 * maxAlpha * progress);
-			else if (progress < 1.0)
-				overlayAlpha = (unsigned char)(2 * maxAlpha * (1 - progress));
-			else {
-				overlayAlpha = 0;
-				drinking = false;
-			}
-
-			// white overlay
-			area->setColorOverlay(overlayAlpha, 255, 255, 255);
-		}
-	}
-
-	void onWell(Entity&, Tile&) {
 		if (drinking == false) {
 			drinking = true;
 
@@ -51,6 +31,21 @@ public:
 			auto& sound = SoundManager::instance();
 			auto splash = sound.play("sounds/splash.oga");
 			splash->setSpeed(1.0 + randFloat(-0.1, 0.1));
+
+			timerProgressAndThen(1000,
+				[&] (double percent) {
+					unsigned char alpha;
+					if (percent < 0.5)
+						alpha = (unsigned char)(2 * maxAlpha * percent);
+					else
+						alpha = (unsigned char)(2 * maxAlpha * (1 - percent));
+					area->setColorOverlay(alpha, 255, 255, 255);
+				},
+				[&] () {
+					area->setColorOverlay(0, 0, 0, 0);
+					drinking = false;
+				}
+			);
 		}
 	}
 };
