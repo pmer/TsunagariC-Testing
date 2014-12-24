@@ -44,6 +44,23 @@ DataWorld& DataWorld::instance()
 
 TestingDataWorld::TestingDataWorld()
 {
+	about.name = "Testing World";
+	about.author = "PariahSoft";
+	about.version = "1";
+
+	parameters.moveMode = TILE;
+
+	parameters.viewportSize = { 160, 160, 0 };
+
+	parameters.input.persistDelay.initial = 300;
+	parameters.input.persistDelay.consecutive = 100;
+
+	parameters.gameStart.player.file = "entities/player/player.xml";
+	parameters.gameStart.player.phase = "down";
+
+	parameters.gameStart.area = "areas/grove01.tmx";
+	parameters.gameStart.coords = { 5, 3, 0 };
+
 	areas["areas/cave01.tmx"] = DataAreaRef(new cave01());
 	areas["areas/grove_house.tmx"] = DataAreaRef(new grove_house());
 	areas["areas/grove01.tmx"] = DataAreaRef(new grove01());
