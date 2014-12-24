@@ -1,11 +1,9 @@
 include ../TsunagariC/src/Makefile.common
 
-OBJECTS = world.o
-WORLDOBJECTS = ../../src/world.o
+OBJECTS = world.o ai/ai-wander.o
+WORLDOBJECTS = ../../src/world.o ../../src/ai/ai-wander.o
 
 all: tsunagari
-
-world.o: world.cpp $(wildcard areas/*.h) $(wildcard areas/*.cpp)
 
 tsunagari: $(OBJECTS)
 	(cd ../TsunagariC/src; $(MAKE) -f Makefile WORLDOBJECTS="$(WORLDOBJECTS)")
@@ -13,3 +11,7 @@ tsunagari: $(OBJECTS)
 clean:
 	$(RM) $(OBJECTS)
 	(cd ../TsunagariC/src; $(MAKE) -f Makefile clean)
+
+world.o: world.cpp $(wildcard areas/*.h) $(wildcard areas/*.cpp)
+ai/ai-wander.o: ai/ai-wander.cpp ../TsunagariC/src/character.h \
+ ../TsunagariC/src/cooldown.h
