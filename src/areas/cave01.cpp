@@ -19,7 +19,7 @@ public:
 
 		playSoundAndThen("sounds/rockfall.oga", [&] () {
 			timerProgressAndThen(3000, [&] (double percent) {
-				unsigned char alpha = (unsigned char)(255 - percent * 255);
+				uint8_t alpha = (uint8_t)(255 - percent * 255);
 				area->setColorOverlay(alpha, 0, 0, 0);
 			}, [&] () {
 				area->setColorOverlay(0, 0, 0, 0);

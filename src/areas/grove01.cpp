@@ -34,11 +34,11 @@ public:
 
 			timerProgressAndThen(1000,
 				[&] (double percent) {
-					unsigned char alpha;
+					uint8_t alpha;
 					if (percent < 0.5)
-						alpha = (unsigned char)(2 * maxAlpha * percent);
+						alpha = (uint8_t)(2 * maxAlpha * percent);
 					else
-						alpha = (unsigned char)(2 * maxAlpha * (1 - percent));
+						alpha = (uint8_t)(2 * maxAlpha * (1 - percent));
 					area->setColorOverlay(alpha, 255, 255, 255);
 				},
 				[&] () {
