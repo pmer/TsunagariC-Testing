@@ -24,8 +24,6 @@
 // IN THE SOFTWARE.
 // **********
 
-#include <iostream>
-
 #include "../TsunagariC/src/log.h"
 
 #include "areas/cave01.cpp"
