@@ -61,6 +61,8 @@ TestingDataWorld::TestingDataWorld()
 	parameters.gameStart.area = "areas/grove01.tmx";
 	parameters.gameStart.coords = { 5, 3, 0 };
 
+	datafile = "../data/testing.world";
+
 	areas["areas/cave01.tmx"] = DataAreaRef(new cave01());
 	areas["areas/grove_house.tmx"] = DataAreaRef(new grove_house());
 	areas["areas/grove01.tmx"] = DataAreaRef(new grove01());
