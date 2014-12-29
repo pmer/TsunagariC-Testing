@@ -6,7 +6,7 @@
 #include "../../TsunagariC/src/sounds.h"
 #include "../../TsunagariC/src/timer.h"
 
-#include "../../TsunagariC/src/data/area.h"
+#include "../../TsunagariC/src/data/data-area.h"
 
 #include "../ai/ai-wander.h"
 

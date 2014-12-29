@@ -27,7 +27,7 @@
 #ifndef TESTINGDATAWORLD_H
 #define TESTINGDATAWORLD_H
 
-#include "../TsunagariC/src/data/world.h"
+#include "../TsunagariC/src/data/data-world.h"
 
 class TestingDataWorld : public DataWorld
 {

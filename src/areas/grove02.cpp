@@ -4,7 +4,7 @@
 #include "../../TsunagariC/src/random.h"
 #include "../../TsunagariC/src/sounds.h"
 
-#include "../../TsunagariC/src/data/area.h"
+#include "../../TsunagariC/src/data/data-area.h"
 
 class grove02 : public DataArea
 {
