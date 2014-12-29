@@ -36,8 +36,8 @@ public:
 		tile2->setType(objects->at(1, 5));
 		area->requestRedraw();
 
-		auto door = SoundManager::instance().play("sounds/door.oga");
-		door->setSpeed(1.0 + randFloat(-0.1, 0.1));
+		Sounds::instance().play("sounds/door.oga")
+			->speed(1.0 + randFloat(-0.1, 0.1));
 	}
 
 	void toggleMusic() {

@@ -34,22 +34,22 @@ public:
 
 		area->requestRedraw();
 
-		auto snd = SoundManager::instance().play("sounds/door.oga");
-		snd->setSpeed(1.0 + randFloat(-0.1, 0.1));
+		Sounds::instance().play("sounds/door.oga")
+			->speed(1.0 + randFloat(-0.1, 0.1));
 	}
 
 	void armorSound() {
-		auto snd = SoundManager::instance().play("sounds/metal_clank.oga");
-		snd->setSpeed(1.0 + randFloat(-0.1, 0.1));
+		Sounds::instance().play("sounds/metal_clank.oga")
+			->speed(1.0 + randFloat(-0.1, 0.1));
 	}
 
 	void bookSound() {
-		auto snd = SoundManager::instance().play("sounds/book.oga");
-		snd->setSpeed(1.0 + randFloat(-0.1, 0.1));
+		Sounds::instance().play("sounds/book.oga")
+			->speed(1.0 + randFloat(-0.1, 0.1));
 	}
 
 	void ouchSound() {
-		auto snd = SoundManager::instance().play("sounds/ouch.oga");
-		snd->setSpeed(1.0 + randFloat(-0.1, 0.1));
+		Sounds::instance().play("sounds/ouch.oga")
+			->speed(1.0 + randFloat(-0.1, 0.1));
 	}
 };

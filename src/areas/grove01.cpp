@@ -3,6 +3,7 @@
 #include "../../TsunagariC/src/npc.h"
 #include "../../TsunagariC/src/overlay.h"
 #include "../../TsunagariC/src/random.h"
+#include "../../TsunagariC/src/sound.h"
 #include "../../TsunagariC/src/timer.h"
 
 #include "../../TsunagariC/src/data/area.h"
@@ -39,8 +40,8 @@ public:
 
 		drinking = true;
 
-		SoundManager::instance().play("sounds/splash.oga")
-			->setSpeed(1.0 + randFloat(-0.1, 0.1));
+		Sounds::instance().play("sounds/splash.oga")
+			->speed(1.0 + randFloat(-0.1, 0.1));
 
 		timerProgressAndThen(1000,
 			[&] (double percent) {

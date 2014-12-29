@@ -1,6 +1,7 @@
 #include "../../TsunagariC/src/area.h"
 #include "../../TsunagariC/src/player.h"
 #include "../../TsunagariC/src/random.h"
+#include "../../TsunagariC/src/sound.h"
 
 #include "../../TsunagariC/src/data/area.h"
 
@@ -30,7 +31,7 @@ public:
 	}
 
 	void ouchSound(Entity&, Tile&) {
-		auto snd = SoundManager::instance().play("sounds/ouch.oga");
-		snd->setSpeed(1.0 + randFloat(-0.1, 0.1));
+		Sounds::instance().play("sounds/ouch.oga")
+			->speed(1.0 + randFloat(-0.1, 0.1));
 	}
 };
