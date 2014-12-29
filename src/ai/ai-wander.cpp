@@ -34,7 +34,7 @@
 #include "ai-wander.h"
 
 //! Move the character.
-static void doMove(Character& c)
+static void doMove(std::shared_ptr<Character> c)
 {
 	ivec2 facing = { 0, 0 };
 	switch (randInt(0, 3)) {
@@ -43,23 +43,27 @@ static void doMove(Character& c)
 	case 2: facing = { 0, -1 }; break;
 	case 3: facing = { 0, +1 }; break;
 	}
-	c.moveByTile(facing);
+	c->moveByTile(facing);
 }
 
 //! Decide whether or not to move.
-static void maybeMove(Character& c, int chance)
+static void maybeMove(std::weak_ptr<Character>& c, int chance)
 {
 	if (randInt(1, chance) == 1)
-		doMove(c);
+		doMove(c.lock());
 }
 
 std::function<void (time_t)>
-AIWanderTile(Character& c, int chance, time_t tryEvery)
+AIWanderTile(std::weak_ptr<Character> c, int chance, time_t tryEvery)
 {
 	assert(conf.moveMode == TILE);
 
 	Cooldown cooldown(tryEvery);
-	return [&c, chance, cooldown] (time_t dt) mutable {
+	return [c, chance, cooldown] (time_t dt) mutable {
+		if (c.expired()) {
+			Log::err("AIWanderTurn", "Character expired");
+			return;
+		}
 		cooldown.advance(dt);
 		if (cooldown.hasExpired()) {
 			cooldown.wrap();
@@ -69,11 +73,15 @@ AIWanderTile(Character& c, int chance, time_t tryEvery)
 }
 
 std::function<void ()>
-AIWanderTurn(Character& c, int chance)
+AIWanderTurn(std::weak_ptr<Character> c, int chance)
 {
 	assert(conf.moveMode == TURN);
 
-	return [&c, chance] () mutable {
+	return [c, chance] () mutable {
+		if (c.expired()) {
+			Log::err("AIWanderTurn", "Character expired");
+			return;
+		}
 		maybeMove(c, chance);
 	};
 }

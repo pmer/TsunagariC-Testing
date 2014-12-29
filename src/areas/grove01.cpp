@@ -21,13 +21,12 @@ public:
 
 	void onLoad() {
 		// Create a wandering wizard NPC.
-		NPC* wizard = area->spawnNPC("entities/wizard/wizard.xml",
+		auto wizard = area->spawnNPC("entities/wizard/wizard.xml",
 			vicoord(6, 3, 0.0), "down");
-		auto wanderBehavior = AIWanderTile(*wizard, 4, 1000);
-		wizard->attach(std::move(wanderBehavior));
+		wizard->attach(AIWanderTile(wizard, 4, 1000));
 
 		// And a drifting cloud Overlay.
-		Overlay* cloud = area->spawnOverlay("entities/cloud/cloud.xml",
+		auto cloud = area->spawnOverlay("entities/cloud/cloud.xml",
 			vicoord(11, 2, 10.0), "down");
 		cloud->drift(ivec2(-400, 0));
 	}
