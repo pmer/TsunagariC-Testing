@@ -63,11 +63,11 @@ TestingDataWorld::TestingDataWorld()
 
 	datafile = "./testing.world";
 
-	areas["areas/cave01.tmx"] = DataAreaRef(new cave01());
-	areas["areas/grove_house.tmx"] = DataAreaRef(new grove_house());
-	areas["areas/grove01.tmx"] = DataAreaRef(new grove01());
-	areas["areas/grove02.tmx"] = DataAreaRef(new grove02());
-	areas["areas/secret_room.tmx"] = DataAreaRef(new secret_room());
+	areas["areas/cave01.tmx"] = std::shared_ptr<DataArea>(new cave01());
+	areas["areas/grove_house.tmx"] = std::shared_ptr<DataArea>(new grove_house());
+	areas["areas/grove01.tmx"] = std::shared_ptr<DataArea>(new grove01());
+	areas["areas/grove02.tmx"] = std::shared_ptr<DataArea>(new grove02());
+	areas["areas/secret_room.tmx"] = std::shared_ptr<DataArea>(new secret_room());
 }
 
 TestingDataWorld::~TestingDataWorld()
