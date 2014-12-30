@@ -61,7 +61,7 @@ AIWanderTile(std::weak_ptr<Character> c, int chance, time_t tryEvery)
 	Cooldown cooldown(tryEvery);
 	return [c, chance, cooldown] (time_t dt) mutable {
 		if (c.expired()) {
-			Log::err("AIWanderTurn", "Character expired");
+			Log::err("AIWanderTile", "Character expired");
 			return;
 		}
 		cooldown.advance(dt);
