@@ -43,12 +43,12 @@ public:
 
 	void toggleMusic() {
 		Music& music = Music::instance();
-		if (music.isPaused()) {
-			music.setPaused(false);
+		if (music.paused()) {
+			music.resume();
 			Log::info("grove02", "Unpausing music!");
 		}
 		else {
-			music.setPaused(true);
+			music.pause();
 			Log::info("grove02", "Pausing music!");
 		}
 	}
