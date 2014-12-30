@@ -19,13 +19,16 @@ public:
 		area->setColorOverlay(255, 0, 0, 0);
 
 		playSoundAndThen("sounds/rockfall.oga", [&] () {
-			timerProgressAndThen(3000, [&] (double percent) {
-				uint8_t alpha = (uint8_t)(255 - percent * 255);
-				area->setColorOverlay(alpha, 0, 0, 0);
-			}, [&] () {
-				area->setColorOverlay(0, 0, 0, 0);
-				Player::instance().setFrozen(false);
-			});
+			timerProgressAndThen(3000,
+				[&] (double percent) {
+					uint8_t alpha = (uint8_t)(255 - percent * 255);
+					area->setColorOverlay(alpha, 0, 0, 0);
+				},
+				[&] () {
+					area->setColorOverlay(0, 0, 0, 0);
+					Player::instance().setFrozen(false);
+				}
+			);
 		});
 
 	}
