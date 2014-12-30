@@ -378,7 +378,7 @@
   </object>
   <object x="80" y="144" width="16" height="16">
    <properties>
-    <property name="exit:down" value="areas/grove01.tmx,5,3,0"/>
+    <property name="exit:down" value="areas/grove01.tmx,15,13,0"/>
    </properties>
   </object>
   <object x="112" y="16" width="16" height="16">

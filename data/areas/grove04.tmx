@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="10" height="20" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="20" tilewidth="16" tileheight="16">
  <properties>
   <property name="loop" value="y"/>
   <property name="name" value="Grove 04"/>
@@ -419,7 +419,7 @@
    <tile gid="35"/>
   </data>
  </layer>
- <objectgroup name="Prop(0)" width="10" height="20">
+ <objectgroup name="Prop(0)">
   <properties>
    <property name="layer" value="0"/>
   </properties>
@@ -520,7 +520,7 @@
   </object>
   <object x="144" y="192" width="16" height="16">
    <properties>
-    <property name="exit:right" value="areas/grove03.tmx,0,3,0"/>
+    <property name="exit:right" value="areas/grove01.tmx,0,3,0"/>
    </properties>
   </object>
  </objectgroup>

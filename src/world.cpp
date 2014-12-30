@@ -29,7 +29,6 @@
 #include "areas/cave01.cpp"
 #include "areas/grove_house.cpp"
 #include "areas/grove01.cpp"
-#include "areas/grove02.cpp"
 #include "areas/secret_room.cpp"
 #include "world.h"
 
@@ -59,14 +58,13 @@ TestingDataWorld::TestingDataWorld()
 	parameters.gameStart.player.phase = "down";
 
 	parameters.gameStart.area = "areas/grove01.tmx";
-	parameters.gameStart.coords = { 5, 3, 0 };
+	parameters.gameStart.coords = { 15, 13, 0 };
 
 	datafile = "./testing.world";
 
 	areas["areas/cave01.tmx"] = std::shared_ptr<DataArea>(new cave01());
 	areas["areas/grove_house.tmx"] = std::shared_ptr<DataArea>(new grove_house());
 	areas["areas/grove01.tmx"] = std::shared_ptr<DataArea>(new grove01());
-	areas["areas/grove02.tmx"] = std::shared_ptr<DataArea>(new grove02());
 	areas["areas/secret_room.tmx"] = std::shared_ptr<DataArea>(new secret_room());
 }
 
