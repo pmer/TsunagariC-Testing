@@ -9,10 +9,14 @@
 
 #include "../../TsunagariC/src/data/data-area.h"
 
+#include "../clouds.h"
+
 #include "../ai/ai-wander.h"
 
 class grove01 : public DataArea
 {
+	Clouds clouds;
+
 	bool drinking = false;
 	Timer wellTimer;
 
@@ -20,6 +24,8 @@ class grove01 : public DataArea
 
 public:
 	grove01() {
+		clouds.setZ(10.0);
+
 		scripts["well"] = (TileScript)&grove01::onWell;
 		scripts["open_chest"] = (TileScript)&grove01::onOpenChest;
 	}
@@ -30,14 +36,16 @@ public:
 			vicoord(16, 13, 0.0), "down");
 		wizard->attach(AIWanderTile(wizard, 4, 1000));
 
-		// And a drifting cloud Overlay.
-		auto cloud = area->spawnOverlay("entities/cloud/cloud.xml",
-			vicoord(21, 12, 10.0), "down");
-		cloud->drift(ivec2(-1200, 0));
+		// And a few drifting cloud Overlays.
+		for (int i = 0; i < 5; i++)
+			clouds.createRandomCloud(*this);
+
+		const int second = 1000;
+		clouds.createCloudsRegularly(*this, 10 * second, 20 * second);
 	}
 
 	void onWell(Entity&, Tile&) {
-		static constexpr int maxAlpha = 192;
+		const int maxAlpha = 192;
 
 		if (drinking)
 			return;

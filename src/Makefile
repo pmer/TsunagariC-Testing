@@ -1,7 +1,7 @@
 include ../TsunagariC/src/Makefile.common
 
-OBJECTS = world.o ai/ai-wander.o
-WORLDOBJECTS = ../../src/world.o ../../src/ai/ai-wander.o
+OBJECTS = clouds.o world.o ai/ai-wander.o
+WORLDOBJECTS = ../../src/clouds.o ../../src/world.o ../../src/ai/ai-wander.o
 
 all: tsunagari
 
