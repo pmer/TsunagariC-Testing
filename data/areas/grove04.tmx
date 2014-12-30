@@ -731,4 +731,9 @@
    <tile gid="0"/>
   </data>
  </layer>
+ <objectgroup name="Prop(10) (Cloud layer)">
+  <properties>
+   <property name="layer" value="10"/>
+  </properties>
+ </objectgroup>
 </map>

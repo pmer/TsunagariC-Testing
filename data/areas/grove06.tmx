@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="10" height="10" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="16" tileheight="16">
  <properties>
   <property name="name" value="Grove 06"/>
  </properties>
@@ -218,7 +218,7 @@
    <tile gid="72"/>
   </data>
  </layer>
- <objectgroup name="Prop(0)" width="10" height="10">
+ <objectgroup name="Prop(0)">
   <properties>
    <property name="layer" value="0"/>
   </properties>
@@ -375,4 +375,9 @@
    <tile gid="0"/>
   </data>
  </layer>
+ <objectgroup name="Prop(10) (Cloud layer)">
+  <properties>
+   <property name="layer" value="10"/>
+  </properties>
+ </objectgroup>
 </map>

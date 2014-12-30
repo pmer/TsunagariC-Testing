@@ -27,8 +27,11 @@
 #include "../TsunagariC/src/log.h"
 
 #include "areas/cave01.cpp"
+#include "areas/bigtree.cpp"
 #include "areas/grove_house.cpp"
 #include "areas/grove01.cpp"
+#include "areas/grove04.cpp"
+#include "areas/grove06.cpp"
 #include "areas/secret_room.cpp"
 #include "world.h"
 
@@ -63,8 +66,11 @@ TestingDataWorld::TestingDataWorld()
 	datafile = "./testing.world";
 
 	areas["areas/cave01.tmx"] = std::shared_ptr<DataArea>(new cave01());
+	areas["areas/bigtree.tmx"] = std::shared_ptr<DataArea>(new bigtree());
 	areas["areas/grove_house.tmx"] = std::shared_ptr<DataArea>(new grove_house());
 	areas["areas/grove01.tmx"] = std::shared_ptr<DataArea>(new grove01());
+	areas["areas/grove04.tmx"] = std::shared_ptr<DataArea>(new grove04());
+	areas["areas/grove06.tmx"] = std::shared_ptr<DataArea>(new grove06());
 	areas["areas/secret_room.tmx"] = std::shared_ptr<DataArea>(new secret_room());
 }
 
