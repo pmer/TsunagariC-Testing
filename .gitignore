@@ -1,1 +1,5 @@
-src/*.o
+bin/
+
+*.o
+*.world
+.DS_Store
