@@ -33,7 +33,7 @@ public:
 	void onLoad() {
 		// Create a wandering wizard NPC.
 		auto wizard = area->spawnNPC("entities/wizard/wizard.xml",
-			vicoord(16, 13, 0.0), "down");
+			vicoord(16, 22, 0.0), "down");
 		wizard->attach(AIWanderTile(wizard, 4, 1000));
 
 		// And a few drifting cloud Overlays.
@@ -84,7 +84,7 @@ public:
 		}
 
 		openedChest = true;
-		auto tile = area->getTile(5, 12, -0.05); // closed chest
+		auto tile = area->getTile(5, 21, -0.1); // closed chest
 		auto tile2 = tile->offset(0, -1); // above the closed chest
 		auto objects = area->getTileSet("areas/tiles/objects.png");
 

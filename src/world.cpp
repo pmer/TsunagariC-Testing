@@ -61,7 +61,7 @@ TestingDataWorld::TestingDataWorld()
 	parameters.gameStart.player.phase = "down";
 
 	parameters.gameStart.area = "areas/grove01.tmx";
-	parameters.gameStart.coords = { 15, 13, 0 };
+	parameters.gameStart.coords = { 15, 22, 0 };
 
 	datafile = "./testing.world";
 
