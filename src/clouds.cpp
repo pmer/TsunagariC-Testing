@@ -27,6 +27,7 @@
 #include <cmath>
 
 #include "../TsunagariC/src/area.h"
+#include "../TsunagariC/src/formatter.h"
 #include "../TsunagariC/src/random.h"
 
 #include "clouds.h"
@@ -97,8 +98,9 @@ void Clouds::createCloudAt(DataArea& dataArea, vicoord tilePosition)
 			return;
 	}
 
-	auto cloud = dataArea.area->spawnOverlay("entities/cloud/cloud.xml",
-		tilePosition, "stance");
+	std::string type = Formatter("entities/clouds/cloud%.xml") %
+		randInt(1, 4);
+	auto cloud = dataArea.area->spawnOverlay(type, tilePosition, "stance");
 
 	clouds.push_back(cloud);
 

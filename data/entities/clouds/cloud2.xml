@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity>
+	<speed>0.2</speed> <!-- movement speed in tiles per second -->
+	<sprite>
+		<sheet tile_width="48" tile_height="26">entities/clouds/cloud2.png</sheet>
+		<phases>
+			<phase name="stance" frames="0" />
+		</phases>
+	</sprite>
+
+	<sounds>
+	</sounds>
+	
+	<scripts>
+	</scripts>
+</entity>
+
