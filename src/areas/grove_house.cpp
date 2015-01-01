@@ -18,9 +18,15 @@ public:
 	}
 
 	void onOpenDoor(Entity&, Tile&) {
-		if (openedDoor)
+		if (openedDoor) {
+			Log::err("grove_house", "onOpenDoor called again");
 			return;
+		}
 		openedDoor = true;
+
+		// torch which activated this trigger should make "ouch" now
+		auto torch_prop = area->getTile(6, 0, 0.0);
+		torch_prop->useScript = scripts["sound_ouch"];
 
 		// closed exit on north wall, property layer
 		auto door_prop = area->getTile(4, 0, 0.0);
