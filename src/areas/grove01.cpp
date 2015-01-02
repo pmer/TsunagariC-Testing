@@ -5,7 +5,6 @@
 #include "../../TsunagariC/src/overlay.h"
 #include "../../TsunagariC/src/random.h"
 #include "../../TsunagariC/src/sounds.h"
-#include "../../TsunagariC/src/timer.h"
 
 #include "../../TsunagariC/src/data/data-area.h"
 
@@ -18,7 +17,6 @@ class grove01 : public DataArea
 	Clouds clouds;
 
 	bool drinking = false;
-	Timer wellTimer;
 
 	bool openedChest = false;
 
