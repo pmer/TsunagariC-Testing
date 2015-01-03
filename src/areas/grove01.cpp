@@ -3,8 +3,6 @@
 #include "../../TsunagariC/src/music.h"
 #include "../../TsunagariC/src/npc.h"
 #include "../../TsunagariC/src/overlay.h"
-#include "../../TsunagariC/src/random.h"
-#include "../../TsunagariC/src/sounds.h"
 
 #include "../../TsunagariC/src/data/data-area.h"
 
@@ -50,8 +48,7 @@ public:
 
 		drinking = true;
 
-		Sounds::instance().play("sounds/splash.oga")
-			->speed(1.0 + randFloat(-0.1, 0.1));
+		playSoundEffect("sounds/splash.oga");
 
 		timerProgressAndThen(1000,
 			[&] (double percent) {
@@ -91,8 +88,7 @@ public:
 		tile2->setType(objects->at(1, 5));
 		area->requestRedraw();
 
-		Sounds::instance().play("sounds/door.oga")
-			->speed(1.0 + randFloat(-0.1, 0.1));
+		playSoundEffect("sounds/door.oga");
 	}
 
 	void toggleMusic() {

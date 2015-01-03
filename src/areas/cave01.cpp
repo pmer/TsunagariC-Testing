@@ -1,7 +1,5 @@
 #include "../../TsunagariC/src/area.h"
 #include "../../TsunagariC/src/player.h"
-#include "../../TsunagariC/src/random.h"
-#include "../../TsunagariC/src/sounds.h"
 
 #include "../../TsunagariC/src/data/data-area.h"
 
@@ -34,7 +32,6 @@ public:
 	}
 
 	void ouchSound(Entity&, Tile&) {
-		Sounds::instance().play("sounds/ouch.oga")
-			->speed(1.0 + randFloat(-0.1, 0.1));
+		playSoundEffect("sounds/ouch.oga");
 	}
 };

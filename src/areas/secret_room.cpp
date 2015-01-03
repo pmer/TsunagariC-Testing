@@ -1,6 +1,3 @@
-#include "../../TsunagariC/src/random.h"
-#include "../../TsunagariC/src/sounds.h"
-
 #include "../../TsunagariC/src/data/data-area.h"
 
 class secret_room : public DataArea
@@ -12,12 +9,10 @@ public:
 	}
 
 	void bookSound() {
-		Sounds::instance().play("sounds/book.oga")
-			->speed(1.0 + randFloat(-0.1, 0.1));
+		playSoundEffect("sounds/book.oga");
 	}
 
 	void ouchSound() {
-		Sounds::instance().play("sounds/ouch.oga")
-			->speed(1.0 + randFloat(-0.1, 0.1));
+		playSoundEffect("sounds/ouch.oga");
 	}
 };

@@ -1,6 +1,4 @@
 #include "../../TsunagariC/src/area.h"
-#include "../../TsunagariC/src/random.h"
-#include "../../TsunagariC/src/sounds.h"
 #include "../../TsunagariC/src/tile.h"
 
 #include "../../TsunagariC/src/data/data-area.h"
@@ -40,22 +38,18 @@ public:
 
 		area->requestRedraw();
 
-		Sounds::instance().play("sounds/door.oga")
-			->speed(1.0 + randFloat(-0.1, 0.1));
+		playSoundEffect("sounds/door.oga");
 	}
 
 	void armorSound() {
-		Sounds::instance().play("sounds/metal_clank.oga")
-			->speed(1.0 + randFloat(-0.1, 0.1));
+		playSoundEffect("sounds/metal_clank.oga");
 	}
 
 	void bookSound() {
-		Sounds::instance().play("sounds/book.oga")
-			->speed(1.0 + randFloat(-0.1, 0.1));
+		playSoundEffect("sounds/book.oga");
 	}
 
 	void ouchSound() {
-		Sounds::instance().play("sounds/ouch.oga")
-			->speed(1.0 + randFloat(-0.1, 0.1));
+		playSoundEffect("sounds/ouch.oga");
 	}
 };
