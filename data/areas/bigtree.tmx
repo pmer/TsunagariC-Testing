@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" width="20" height="20" tilewidth="16" tileheight="16">
  <properties>
   <property name="main_music" value="music/Devotion.oga"/>
   <property name="name" value="Big Tree"/>
@@ -820,13 +820,13 @@
    <tile gid="98"/>
   </data>
  </layer>
- <objectgroup name="Prop(0)">
+ <objectgroup name="Prop(0)" width="0" height="0">
   <properties>
    <property name="layer" value="0"/>
   </properties>
   <object x="128" y="304" width="16" height="16">
    <properties>
-    <property name="exit:down" value="areas/cave01.tmx,6,2,0"/>
+    <property name="exit:down" value="areas/cave01.tmx,6,3,0"/>
    </properties>
   </object>
   <object x="0" y="272" width="16" height="48">
@@ -1402,7 +1402,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <objectgroup name="Prop(10) (Cloud layer)">
+ <objectgroup name="Prop(10) (Cloud layer)" width="0" height="0">
   <properties>
    <property name="layer" value="10"/>
   </properties>
