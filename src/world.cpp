@@ -52,7 +52,7 @@ TestingDataWorld::TestingDataWorld()
 
 	parameters.moveMode = TILE;
 
-	parameters.viewportSize = { 160, 160, 0 };
+	parameters.viewportResolution = { 160, 160, };
 
 	parameters.input.persistDelay.initial = 300;
 	parameters.input.persistDelay.consecutive = 100;
