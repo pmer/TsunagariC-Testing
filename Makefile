@@ -1,4 +1,4 @@
-BIN_FILES := bin bin/tsunagari bin/client.ini bin/base.zip bin/testing.world
+BIN_FILES := bin bin/tsunagari bin/client.ini bin/testing.world
 
 all: build
 
@@ -19,9 +19,6 @@ bin/tsunagari: TsunagariC/src/tsunagari
 	cp $< $@
 
 bin/client.ini: TsunagariC/data/client.ini
-	cp $< $@
-
-bin/base.zip: TsunagariC/data/base.zip
 	cp $< $@
 
 bin/testing.world: data/testing.world
