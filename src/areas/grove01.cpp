@@ -1,3 +1,5 @@
+#include <math.h>
+
 #include "../../TsunagariC/src/area.h"
 #include "../../TsunagariC/src/log.h"
 #include "../../TsunagariC/src/music.h"
@@ -9,6 +11,12 @@
 #include "../clouds.h"
 
 #include "../ai/ai-wander.h"
+
+// Circular in-out ease
+static double ease(double x)
+{
+	return 0.5 * sin(M_PI * x - M_PI_2) + 0.5;
+}
 
 class grove01 : public DataArea
 {
@@ -54,9 +62,9 @@ public:
 			[&] (double percent) {
 				uint8_t alpha;
 				if (percent < 0.5)
-					alpha = (uint8_t)(2 * maxAlpha * percent);
+					alpha = (uint8_t)(maxAlpha * ease(2 * percent));
 				else
-					alpha = (uint8_t)(2 * maxAlpha * (1 - percent));
+					alpha = (uint8_t)(maxAlpha * ease(2 * (1 - percent)));
 				area->setColorOverlay(alpha, 255, 255, 255);
 			},
 			[&] () {
