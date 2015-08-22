@@ -33,17 +33,28 @@
 
 #include "ai-wander.h"
 
+static ivec2 randomFacing()
+{
+	switch (randInt(0, 3)) {
+	case 0: return { -1, 0 };
+	case 1: return { +1, 0 };
+	case 2: return { 0, -1 };
+	case 3: return { 0, +1 };
+	}
+	return { 0, 0 };
+}
+
 //! Move the character.
 static void doMove(std::shared_ptr<Character> c)
 {
-	ivec2 facing = { 0, 0 };
-	switch (randInt(0, 3)) {
-	case 0: facing = { -1, 0 }; break;
-	case 1: facing = { +1, 0 }; break;
-	case 2: facing = { 0, -1 }; break;
-	case 3: facing = { 0, +1 }; break;
-	}
-	c->moveByTile(facing);
+	c->moveByTile(randomFacing());
+}
+
+//! Change direction we are facing.
+static void doFace(std::shared_ptr<Character> c)
+{
+	c->setFacing(randomFacing());
+	c->setAnimationStanding();
 }
 
 //! Decide whether or not to move.
@@ -51,6 +62,8 @@ static void maybeMove(std::weak_ptr<Character>& c, int chance)
 {
 	if (randInt(1, chance) == 1)
 		doMove(c.lock());
+	else if (randInt(1, chance) == 1)
+		doFace(c.lock());
 }
 
 std::function<void (time_t)>
