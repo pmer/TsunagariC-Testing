@@ -1,4 +1,4 @@
-EXE := tsunagari
+EXE := tsunagari-testing
 ZIP := testing.world
 
 include TsunagariC/Makefile
