@@ -1,4 +1,32 @@
-#include <math.h>
+/********************************
+** Tsunagari Tile Engine       **
+** grove01.cpp                 **
+** Copyright 2016 Paul Merrill **
+********************************/
+
+// **********
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+// IN THE SOFTWARE.
+// **********
+
+#include "../../TsunagariC/src/data/data-area.h"
+
+#include <cmath>
 
 #include "../../TsunagariC/src/area.h"
 #include "../../TsunagariC/src/log.h"
@@ -6,27 +34,23 @@
 #include "../../TsunagariC/src/npc.h"
 #include "../../TsunagariC/src/overlay.h"
 
-#include "../../TsunagariC/src/data/data-area.h"
-
 #include "../clouds.h"
 
 #include "../ai/ai-wander.h"
 
 // Circular in-out ease
-static double ease(double x)
-{
+static double ease(double x) {
     return 0.5 * sin(M_PI * x - M_PI_2) + 0.5;
 }
 
-class grove01 : public DataArea
-{
+class grove01 : public DataArea {
     Clouds clouds;
 
     bool drinking = false;
 
     bool openedChest = false;
 
-public:
+ public:
     grove01() {
         clouds.setZ(10.0);
 
@@ -37,12 +61,13 @@ public:
     void onLoad() {
         // Create a wandering wizard NPC.
         auto wizard = area->spawnNPC("entities/wizard/wizard.xml",
-            vicoord(16, 22, 0.0), "down");
+                                     vicoord(16, 22, 0.0), "down");
         wizard->attach(AIWanderTile(wizard, 4, 1000));
 
         // And a few drifting cloud Overlays.
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++) {
             clouds.createRandomCloud(*this);
+        }
 
         const int second = 1000;
         clouds.createCloudsRegularly(*this, 10 * second, 20 * second);
@@ -51,15 +76,16 @@ public:
     void onWell(Entity&, Tile&) {
         const int maxAlpha = 192;
 
-        if (drinking)
+        if (drinking) {
             return;
+        }
 
         drinking = true;
 
         playSoundEffect("sounds/splash.oga");
 
         timerProgressAndThen(1000,
-            [&] (double percent) {
+            [this, maxAlpha] (double percent) {
                 uint8_t alpha;
                 if (percent < 0.5)
                     alpha = (uint8_t)(maxAlpha * ease(2 * percent));
@@ -67,11 +93,10 @@ public:
                     alpha = (uint8_t)(maxAlpha * ease(2 * (1 - percent)));
                 area->setColorOverlay(alpha, 255, 255, 255);
             },
-            [&] () {
+            [this, maxAlpha] () {
                 area->setColorOverlay(0, 0, 0, 0);
                 drinking = false;
-            }
-        );
+            });
     }
 
     void onOpenChest(Entity&, Tile&) {
@@ -87,8 +112,8 @@ public:
         }
 
         openedChest = true;
-        auto tile = area->getTile(5, 21, -0.1); // closed chest
-        auto tile2 = tile->offset(0, -1); // above the closed chest
+        auto tile = area->getTile(5, 21, -0.1);  // closed chest
+        auto tile2 = tile->offset(0, -1);  // above the closed chest
         auto objects = area->getTileSet("areas/tiles/objects.png");
 
         // Change to open chest, bottom and top halves.
@@ -104,8 +129,7 @@ public:
         if (music.paused()) {
             music.resume();
             Log::info("grove01", "Unpausing music!");
-        }
-        else {
+        } else {
             music.pause();
             Log::info("grove01", "Pausing music!");
         }

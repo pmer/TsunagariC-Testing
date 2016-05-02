@@ -24,17 +24,17 @@
 // IN THE SOFTWARE.
 // **********
 
-#include <assert.h>
+#include "./ai-wander.h"
+
+#include <algorithm>
+#include <cassert>
 
 #include "../../TsunagariC/src/character.h"
 #include "../../TsunagariC/src/client-conf.h"
 #include "../../TsunagariC/src/cooldown.h"
 #include "../../TsunagariC/src/random.h"
 
-#include "ai-wander.h"
-
-static ivec2 randomFacing()
-{
+static ivec2 randomFacing() {
     switch (randInt(0, 3)) {
     case 0: return { -1, 0 };
     case 1: return { +1, 0 };
@@ -45,30 +45,26 @@ static ivec2 randomFacing()
 }
 
 //! Move the character.
-static void doMove(std::shared_ptr<Character> c)
-{
+static void doMove(std::shared_ptr<Character> c) {
     c->moveByTile(randomFacing());
 }
 
 //! Change direction we are facing.
-static void doFace(std::shared_ptr<Character> c)
-{
+static void doFace(std::shared_ptr<Character> c) {
     c->setFacing(randomFacing());
     c->setAnimationStanding();
 }
 
 //! Decide whether or not to move.
-static void maybeMove(std::weak_ptr<Character>& c, int chance)
-{
+static void maybeMove(std::weak_ptr<Character>& c, int chance) {
     if (randInt(1, chance) == 1)
         doMove(c.lock());
     else if (randInt(1, chance) == 1)
         doFace(c.lock());
 }
 
-std::function<void (time_t)>
-AIWanderTile(std::weak_ptr<Character> c, int chance, time_t tryEvery)
-{
+std::function<void(time_t)>
+AIWanderTile(std::weak_ptr<Character> c, int chance, time_t tryEvery) {
     assert(conf.moveMode == TILE);
 
     Cooldown cooldown(tryEvery);
@@ -85,9 +81,8 @@ AIWanderTile(std::weak_ptr<Character> c, int chance, time_t tryEvery)
     };
 }
 
-std::function<void ()>
-AIWanderTurn(std::weak_ptr<Character> c, int chance)
-{
+std::function<void()>
+AIWanderTurn(std::weak_ptr<Character> c, int chance) {
     assert(conf.moveMode == TURN);
 
     return [c, chance] () mutable {

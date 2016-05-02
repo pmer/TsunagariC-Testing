@@ -24,8 +24,8 @@
 // IN THE SOFTWARE.
 // **********
 
-#ifndef CLOUDS_H
-#define CLOUDS_H
+#ifndef SRC_CLOUDS_H_
+#define SRC_CLOUDS_H_
 
 #include <memory>
 #include <vector>
@@ -64,4 +64,4 @@ private:
     std::vector<std::shared_ptr<Overlay>> clouds;
 };
 
-#endif
+#endif  // SRC_CLOUDS_H_

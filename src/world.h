@@ -24,18 +24,18 @@
 // IN THE SOFTWARE.
 // **********
 
-#ifndef TESTINGDATAWORLD_H
-#define TESTINGDATAWORLD_H
+#ifndef SRC_WORLD_H_
+#define SRC_WORLD_H_
 
 #include "../TsunagariC/src/data/data-world.h"
 
 class TestingDataWorld : public DataWorld
 {
-public:
+ public:
     TestingDataWorld();
     ~TestingDataWorld();
 
     bool init();
 };
 
-#endif
+#endif  // SRC_WORLD_H_
