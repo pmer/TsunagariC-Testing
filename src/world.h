@@ -32,10 +32,10 @@
 class TestingDataWorld : public DataWorld
 {
 public:
-	TestingDataWorld();
-	~TestingDataWorld();
+    TestingDataWorld();
+    ~TestingDataWorld();
 
-	bool init();
+    bool init();
 };
 
 #endif

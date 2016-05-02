@@ -35,66 +35,66 @@
 
 static ivec2 randomFacing()
 {
-	switch (randInt(0, 3)) {
-	case 0: return { -1, 0 };
-	case 1: return { +1, 0 };
-	case 2: return { 0, -1 };
-	case 3: return { 0, +1 };
-	}
-	return { 0, 0 };
+    switch (randInt(0, 3)) {
+    case 0: return { -1, 0 };
+    case 1: return { +1, 0 };
+    case 2: return { 0, -1 };
+    case 3: return { 0, +1 };
+    }
+    return { 0, 0 };
 }
 
 //! Move the character.
 static void doMove(std::shared_ptr<Character> c)
 {
-	c->moveByTile(randomFacing());
+    c->moveByTile(randomFacing());
 }
 
 //! Change direction we are facing.
 static void doFace(std::shared_ptr<Character> c)
 {
-	c->setFacing(randomFacing());
-	c->setAnimationStanding();
+    c->setFacing(randomFacing());
+    c->setAnimationStanding();
 }
 
 //! Decide whether or not to move.
 static void maybeMove(std::weak_ptr<Character>& c, int chance)
 {
-	if (randInt(1, chance) == 1)
-		doMove(c.lock());
-	else if (randInt(1, chance) == 1)
-		doFace(c.lock());
+    if (randInt(1, chance) == 1)
+        doMove(c.lock());
+    else if (randInt(1, chance) == 1)
+        doFace(c.lock());
 }
 
 std::function<void (time_t)>
 AIWanderTile(std::weak_ptr<Character> c, int chance, time_t tryEvery)
 {
-	assert(conf.moveMode == TILE);
+    assert(conf.moveMode == TILE);
 
-	Cooldown cooldown(tryEvery);
-	return [c, chance, cooldown] (time_t dt) mutable {
-		if (c.expired()) {
-			Log::err("AIWanderTile", "Character expired");
-			return;
-		}
-		cooldown.advance(dt);
-		if (cooldown.hasExpired()) {
-			cooldown.wrap();
-			maybeMove(c, chance);
-		}
-	};
+    Cooldown cooldown(tryEvery);
+    return [c, chance, cooldown] (time_t dt) mutable {
+        if (c.expired()) {
+            Log::err("AIWanderTile", "Character expired");
+            return;
+        }
+        cooldown.advance(dt);
+        if (cooldown.hasExpired()) {
+            cooldown.wrap();
+            maybeMove(c, chance);
+        }
+    };
 }
 
 std::function<void ()>
 AIWanderTurn(std::weak_ptr<Character> c, int chance)
 {
-	assert(conf.moveMode == TURN);
+    assert(conf.moveMode == TURN);
 
-	return [c, chance] () mutable {
-		if (c.expired()) {
-			Log::err("AIWanderTurn", "Character expired");
-			return;
-		}
-		maybeMove(c, chance);
-	};
+    return [c, chance] () mutable {
+        if (c.expired()) {
+            Log::err("AIWanderTurn", "Character expired");
+            return;
+        }
+        maybeMove(c, chance);
+    };
 }

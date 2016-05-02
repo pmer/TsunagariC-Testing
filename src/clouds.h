@@ -39,29 +39,29 @@
 class Clouds
 {
 public:
-	Clouds();
+    Clouds();
 
-	//! Set spawning z-height layer that clouds will appear on.
-	void setZ(double z);
+    //! Set spawning z-height layer that clouds will appear on.
+    void setZ(double z);
 
-	//! Create a cloud at a random position.  May do nothing if the cloud
-	//! would have appeared to close to another cloud (which would be ugly).
-	void createRandomCloud(DataArea& dataArea);
-	//! Create a sequence of clouds over time that drift in from the
-	//! right-hand-side.  One will attempt to appear every [minMS, maxMS]
-	//! milliseconds.  May do nothing if the cloud would have appeared to
-	//! close to another cloud (which would be ugly).
-	void createCloudsRegularly(DataArea& dataArea, int minMS, int maxMS);
+    //! Create a cloud at a random position.  May do nothing if the cloud
+    //! would have appeared to close to another cloud (which would be ugly).
+    void createRandomCloud(DataArea& dataArea);
+    //! Create a sequence of clouds over time that drift in from the
+    //! right-hand-side.  One will attempt to appear every [minMS, maxMS]
+    //! milliseconds.  May do nothing if the cloud would have appeared to
+    //! close to another cloud (which would be ugly).
+    void createCloudsRegularly(DataArea& dataArea, int minMS, int maxMS);
 
 private:
-	//! Create a cloud, move it left until out of area, then destroy it.
-	//! If the cloud would be created next to another, already existing
-	//! cloud, do nothing.
-	void createCloudAt(DataArea& dataArea, vicoord tilePosition);
+    //! Create a cloud, move it left until out of area, then destroy it.
+    //! If the cloud would be created next to another, already existing
+    //! cloud, do nothing.
+    void createCloudAt(DataArea& dataArea, vicoord tilePosition);
 
-	double z;
+    double z;
 
-	std::vector<std::shared_ptr<Overlay>> clouds;
+    std::vector<std::shared_ptr<Overlay>> clouds;
 };
 
 #endif

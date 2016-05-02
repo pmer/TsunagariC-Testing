@@ -40,38 +40,38 @@ static TestingDataWorld globalTestingDataWorld;
 
 DataWorld& DataWorld::instance()
 {
-	return globalTestingDataWorld;
+    return globalTestingDataWorld;
 }
 
 
 TestingDataWorld::TestingDataWorld()
 {
-	about.name = "Testing World";
-	about.author = "PariahSoft";
-	about.version = "1";
+    about.name = "Testing World";
+    about.author = "PariahSoft";
+    about.version = "1";
 
-	parameters.moveMode = TILE;
+    parameters.moveMode = TILE;
 
-	parameters.viewportResolution = { 160, 160, };
+    parameters.viewportResolution = { 240, 160 };
 
-	parameters.input.persistDelay.initial = 300;
-	parameters.input.persistDelay.consecutive = 100;
+    parameters.input.persistDelay.initial = 300;
+    parameters.input.persistDelay.consecutive = 100;
 
-	parameters.gameStart.player.file = "entities/player/player.xml";
-	parameters.gameStart.player.phase = "down";
+    parameters.gameStart.player.file = "entities/player/player.xml";
+    parameters.gameStart.player.phase = "down";
 
-	parameters.gameStart.area = "areas/grove01.tmx";
-	parameters.gameStart.coords = { 15, 22, 0 };
+    parameters.gameStart.area = "areas/grove01.tmx";
+    parameters.gameStart.coords = { 15, 22, 0 };
 
-	datafile = "./testing.world";
+    datafile = "./testing.world";
 
-	areas["areas/cave01.tmx"] = std::shared_ptr<DataArea>(new cave01());
-	areas["areas/bigtree.tmx"] = std::shared_ptr<DataArea>(new bigtree());
-	areas["areas/grove_house.tmx"] = std::shared_ptr<DataArea>(new grove_house());
-	areas["areas/grove01.tmx"] = std::shared_ptr<DataArea>(new grove01());
-	areas["areas/grove04.tmx"] = std::shared_ptr<DataArea>(new grove04());
-	areas["areas/grove06.tmx"] = std::shared_ptr<DataArea>(new grove06());
-	areas["areas/secret_room.tmx"] = std::shared_ptr<DataArea>(new secret_room());
+    areas["areas/cave01.tmx"] = std::shared_ptr<DataArea>(new cave01());
+    areas["areas/bigtree.tmx"] = std::shared_ptr<DataArea>(new bigtree());
+    areas["areas/grove_house.tmx"] = std::shared_ptr<DataArea>(new grove_house());
+    areas["areas/grove01.tmx"] = std::shared_ptr<DataArea>(new grove01());
+    areas["areas/grove04.tmx"] = std::shared_ptr<DataArea>(new grove04());
+    areas["areas/grove06.tmx"] = std::shared_ptr<DataArea>(new grove06());
+    areas["areas/secret_room.tmx"] = std::shared_ptr<DataArea>(new secret_room());
 }
 
 TestingDataWorld::~TestingDataWorld()
@@ -80,6 +80,6 @@ TestingDataWorld::~TestingDataWorld()
 
 bool TestingDataWorld::init()
 {
-	Log::info("TestingDataWorld", "Hello!");
-	return true;
+    Log::info("TestingDataWorld", "Hello!");
+    return true;
 }

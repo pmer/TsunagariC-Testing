@@ -7202,7 +7202,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <objectgroup name="Prop(1)">
+ <objectgroup name="Prop(1)" visible="0">
   <properties>
    <property name="layer" value="1"/>
   </properties>
@@ -7247,7 +7247,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Prop(10) (Cloud layer)">
+ <objectgroup name="Prop(10) (Cloud layer)" visible="0">
   <properties>
    <property name="layer" value="10"/>
   </properties>
