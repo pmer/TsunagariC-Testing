@@ -1,6 +1,6 @@
 /********************************
 ** Tsunagari Tile Engine       **
-** bigtree.cpp                 **
+** big-tree.h                  **
 ** Copyright 2016 Paul Merrill **
 ********************************/
 
@@ -24,22 +24,20 @@
 // IN THE SOFTWARE.
 // **********
 
-#include "../../TsunagariC/src/data/data-area.h"
+#ifndef SRC_AREAS_BIG_TREE_H_
+#define SRC_AREAS_BIG_TREE_H_
 
-#include "../clouds.h"
+#include "data/data-area.h"
 
-class bigtree : public DataArea {
+#include "world/clouds.h"
+
+class BigTreeArea : public DataArea {
     Clouds clouds;
 
  public:
-    bigtree() {
-        clouds.setZ(10.0);
-    }
+    BigTreeArea();
 
-    void onLoad() {
-        clouds.createRandomCloud(*this);
-
-        const int second = 1000;
-        clouds.createCloudsRegularly(*this, 30 * second, 60 * second);
-    }
+    void onLoad();
 };
+
+#endif  // SRC_AREAS_BIG_TREE_H_

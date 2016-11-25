@@ -24,7 +24,7 @@
 // IN THE SOFTWARE.
 // **********
 
-#include "../../TsunagariC/src/data/data-area.h"
+#include "data/data-area.h"
 
 class secret_room : public DataArea {
  public:

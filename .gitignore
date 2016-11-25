@@ -1,5 +1,4 @@
-bin/
-
-*.o
-*.world
+.idea
+.idea
+cmake-build-debug
 .DS_Store

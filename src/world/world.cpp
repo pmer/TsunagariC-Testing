@@ -2,6 +2,7 @@
 ** Tsunagari Tile Engine         **
 ** world.cpp                     **
 ** Copyright 2014 PariahSoft LLC **
+** Copyright 2016 Paul Merrill   **
 **********************************/
 
 // **********
@@ -24,17 +25,17 @@
 // IN THE SOFTWARE.
 // **********
 
-#include "./world.h"
+#include "world/world.h"
 
-#include "../TsunagariC/src/log.h"
+#include "core/log.h"
 
+#include "areas/big-tree.h"
 #include "areas/cave01.cpp"
-#include "areas/bigtree.cpp"
-#include "areas/grove_house.cpp"
+#include "areas/grove-house.cpp"
 #include "areas/grove01.cpp"
 #include "areas/grove04.cpp"
 #include "areas/grove06.cpp"
-#include "areas/secret_room.cpp"
+#include "areas/secret-room.cpp"
 
 
 static TestingDataWorld globalTestingDataWorld;
@@ -46,7 +47,7 @@ DataWorld& DataWorld::instance() {
 
 TestingDataWorld::TestingDataWorld() {
     about.name = "Testing World";
-    about.author = "PariahSoft";
+    about.author = "Michael Reiley and Paul Merrill";
     about.version = "1";
 
     parameters.moveMode = TILE;
@@ -65,7 +66,7 @@ TestingDataWorld::TestingDataWorld() {
     datafile = "./testing.world";
 
     areas["areas/cave01.tmx"] = std::make_shared<cave01>();
-    areas["areas/bigtree.tmx"] = std::make_shared<bigtree>();
+    areas["areas/bigtree.tmx"] = std::make_shared<BigTreeArea>();
     areas["areas/grove_house.tmx"] = std::make_shared<grove_house>();
     areas["areas/grove01.tmx"] = std::make_shared<grove01>();
     areas["areas/grove04.tmx"] = std::make_shared<grove04>();

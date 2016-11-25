@@ -2,6 +2,7 @@
 ** Tsunagari Tile Engine         **
 ** ai-wander.cpp                 **
 ** Copyright 2014 PariahSoft LLC **
+** Copyright 2016 Paul Merrill   **
 **********************************/
 
 // **********
@@ -24,15 +25,16 @@
 // IN THE SOFTWARE.
 // **********
 
-#include "./ai-wander.h"
+#include "ai/ai-wander.h"
+
+#include <assert.h>
 
 #include <algorithm>
-#include <cassert>
 
-#include "../../TsunagariC/src/character.h"
-#include "../../TsunagariC/src/client-conf.h"
-#include "../../TsunagariC/src/cooldown.h"
-#include "../../TsunagariC/src/random.h"
+#include "core/character.h"
+#include "core/client-conf.h"
+#include "core/cooldown.h"
+#include "core/random.h"
 
 static ivec2 randomFacing() {
     switch (randInt(0, 3)) {
@@ -57,10 +59,11 @@ static void doFace(std::shared_ptr<Character> c) {
 
 //! Decide whether or not to move.
 static void maybeMove(std::weak_ptr<Character>& c, int chance) {
-    if (randInt(1, chance) == 1)
+    if (randInt(1, chance) == 1) {
         doMove(c.lock());
-    else if (randInt(1, chance) == 1)
+    } else if (randInt(1, chance) == 1) {
         doFace(c.lock());
+    }
 }
 
 std::function<void(time_t)>

@@ -24,9 +24,9 @@
 // IN THE SOFTWARE.
 // **********
 
-#include "../../TsunagariC/src/data/data-area.h"
+#include "data/data-area.h"
 
-#include "../clouds.h"
+#include "world/clouds.h"
 
 class grove06 : public DataArea {
     Clouds clouds;

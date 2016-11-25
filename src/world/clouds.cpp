@@ -2,6 +2,7 @@
 ** Tsunagari Tile Engine         **
 ** clouds.cpp                    **
 ** Copyright 2014 PariahSoft LLC **
+** Copyright 2016 Paul Merrill   **
 **********************************/
 
 // **********
@@ -24,15 +25,16 @@
 // IN THE SOFTWARE.
 // **********
 
-#include "./clouds.h"
+#include "world/clouds.h"
+
+#include <math.h>
 
 #include <algorithm>
-#include <cmath>
 #include <string>
 
-#include "../TsunagariC/src/area.h"
-#include "../TsunagariC/src/formatter.h"
-#include "../TsunagariC/src/random.h"
+#include "core/area.h"
+#include "core/formatter.h"
+#include "core/random.h"
 
 Clouds::Clouds()
     : z(0.0) {

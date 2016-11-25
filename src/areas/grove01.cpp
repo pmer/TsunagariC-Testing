@@ -24,19 +24,18 @@
 // IN THE SOFTWARE.
 // **********
 
-#include "../../TsunagariC/src/data/data-area.h"
+#include <math.h>
 
-#include <cmath>
+#include "core/area.h"
+#include "core/log.h"
+#include "core/music.h"
+#include "core/npc.h"
+#include "core/overlay.h"
+#include "core/vec.h"
+#include "data/data-area.h"
 
-#include "../../TsunagariC/src/area.h"
-#include "../../TsunagariC/src/log.h"
-#include "../../TsunagariC/src/music.h"
-#include "../../TsunagariC/src/npc.h"
-#include "../../TsunagariC/src/overlay.h"
-
-#include "../clouds.h"
-
-#include "../ai/ai-wander.h"
+#include "ai/ai-wander.h"
+#include "world/clouds.h"
 
 // Circular in-out ease
 static double ease(double x) {
@@ -87,10 +86,11 @@ class grove01 : public DataArea {
         timerProgressAndThen(1000,
             [this, maxAlpha] (double percent) {
                 uint8_t alpha;
-                if (percent < 0.5)
+                if (percent < 0.5) {
                     alpha = (uint8_t)(maxAlpha * ease(2 * percent));
-                else
+                } else {
                     alpha = (uint8_t)(maxAlpha * ease(2 * (1 - percent)));
+                }
                 area->setColorOverlay(alpha, 255, 255, 255);
             },
             [this, maxAlpha] () {

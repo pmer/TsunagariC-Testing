@@ -24,10 +24,10 @@
 // IN THE SOFTWARE.
 // **********
 
-#include "../../TsunagariC/src/data/data-area.h"
-
-#include "../../TsunagariC/src/area.h"
-#include "../../TsunagariC/src/tile.h"
+#include "core/area.h"
+#include "core/log.h"
+#include "core/tile.h"
+#include "data/data-area.h"
 
 class grove_house : public DataArea {
     bool openedDoor = false;

@@ -2,6 +2,7 @@
 ** Tsunagari Tile Engine         **
 ** clouds.h                      **
 ** Copyright 2014 PariahSoft LLC **
+** Copyright 2016 Paul Merrill   **
 **********************************/
 
 // **********
@@ -24,21 +25,19 @@
 // IN THE SOFTWARE.
 // **********
 
-#ifndef SRC_CLOUDS_H_
-#define SRC_CLOUDS_H_
+#ifndef SRC_WORLD_CLOUDS_H_
+#define SRC_WORLD_CLOUDS_H_
 
 #include <memory>
 #include <vector>
 
-#include "../TsunagariC/src/overlay.h"
-#include "../TsunagariC/src/vec.h"
-
-#include "../TsunagariC/src/data/data-area.h"
+#include "core/overlay.h"
+#include "core/vec.h"
+#include "data/data-area.h"
 
 //! Create clouds that drift left across an Area.
-class Clouds
-{
-public:
+class Clouds {
+ public:
     Clouds();
 
     //! Set spawning z-height layer that clouds will appear on.
@@ -53,7 +52,7 @@ public:
     //! close to another cloud (which would be ugly).
     void createCloudsRegularly(DataArea& dataArea, int minMS, int maxMS);
 
-private:
+ private:
     //! Create a cloud, move it left until out of area, then destroy it.
     //! If the cloud would be created next to another, already existing
     //! cloud, do nothing.
@@ -64,4 +63,4 @@ private:
     std::vector<std::shared_ptr<Overlay>> clouds;
 };
 
-#endif  // SRC_CLOUDS_H_
+#endif  // SRC_WORLD_CLOUDS_H_

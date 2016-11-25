@@ -1,8 +1,8 @@
-/**********************************
-** Tsunagari Tile Engine         **
-** world.h                       **
-** Copyright 2014 PariahSoft LLC **
-**********************************/
+/********************************
+** Tsunagari Tile Engine       **
+** big-tree.cpp                **
+** Copyright 2016 Paul Merrill **
+********************************/
 
 // **********
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,18 +24,15 @@
 // IN THE SOFTWARE.
 // **********
 
-#ifndef SRC_WORLD_H_
-#define SRC_WORLD_H_
+#include "areas/big-tree.h"
 
-#include "../TsunagariC/src/data/data-world.h"
+BigTreeArea::BigTreeArea() {
+    clouds.setZ(10.0);
+}
 
-class TestingDataWorld : public DataWorld
-{
- public:
-    TestingDataWorld();
-    ~TestingDataWorld();
+void BigTreeArea::onLoad() {
+    clouds.createRandomCloud(*this);
 
-    bool init();
-};
-
-#endif  // SRC_WORLD_H_
+    const int second = 1000;
+    clouds.createCloudsRegularly(*this, 30 * second, 60 * second);
+}
