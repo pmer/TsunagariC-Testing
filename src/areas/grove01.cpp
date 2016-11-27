@@ -48,6 +48,7 @@ class grove01 : public DataArea {
     bool drinking = false;
 
     bool openedChest = false;
+    bool musicPaused = false;
 
  public:
     grove01() {
@@ -126,12 +127,13 @@ class grove01 : public DataArea {
 
     void toggleMusic() {
         Music& music = Music::instance();
-        if (music.paused()) {
+        if (musicPaused) {
             music.resume();
             Log::info("grove01", "Unpausing music!");
         } else {
             music.pause();
             Log::info("grove01", "Pausing music!");
         }
+        musicPaused = !musicPaused;
     }
 };
