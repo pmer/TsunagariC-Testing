@@ -1,0 +1,31 @@
+{
+	"speed": 2.0,  // movement speed in tiles per second
+	"sprite": {
+		"sheet": {
+			"tile_width": 16,
+			"tile_height": 18,
+			"path": "entities/player/player.png"
+		},
+		"phases": {
+			"down": {"frame": 7},
+			"down-left": {"frame": 7},
+			"left": {"frame": 10},
+			"up-left": {"frame": 1},
+			"up": {"frame": 1},
+			"up-right": {"frame": 1},
+			"right": {"frame": 4},
+			"down-right": {"frame": 7},
+
+			"moving up": {"speed": 6.0, "frames": [0,1,2,1]},
+			"moving right": {"speed": 6.0, "frames": [3,4,5,4]},
+			"moving down": {"speed": 6.0, "frames": [6,7,8,7]},
+			"moving left": {"speed": 6.0, "frames": [9,10,11,10]}
+		}
+	},
+	"sounds": {
+		"step": "sounds/step.oga"
+	},
+	"scripts": {
+		// "on_tile_entry": "entities/player/ping.py"
+	}
+}

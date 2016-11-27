@@ -57,7 +57,7 @@ TestingDataWorld::TestingDataWorld() {
     parameters.input.persistDelay.initial = 300;
     parameters.input.persistDelay.consecutive = 100;
 
-    parameters.gameStart.player.file = "entities/player/player.xml";
+    parameters.gameStart.player.file = "entities/player/player.json";
     parameters.gameStart.player.phase = "down";
 
     parameters.gameStart.area = "areas/grove01.tmx";
