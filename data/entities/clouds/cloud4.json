@@ -1,0 +1,13 @@
+{
+	"speed": 0.2,  // movement speed in tiles per second
+	"sprite": {
+		"sheet": {
+			"tile_width": 32,
+			"tile_height": 23,
+			"path": "entities/clouds/cloud4.png"
+		},
+		"phases": {
+			"stance": {"frame": 0}
+		}
+	}
+}

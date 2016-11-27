@@ -93,7 +93,7 @@ void Clouds::createCloudAt(DataArea& dataArea, vicoord tilePosition) {
         }
     }
 
-    std::string type = Formatter("entities/clouds/cloud%.xml") % randInt(1, 4);
+    std::string type = Formatter("entities/clouds/cloud%.json") % randInt(1, 4);
     auto cloud = dataArea.area->spawnOverlay(type, tilePosition, "stance");
 
     clouds.push_back(cloud);
