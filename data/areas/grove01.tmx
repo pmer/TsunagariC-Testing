@@ -4,8 +4,8 @@
   <property name="main_music" value="music/Autumn_Forest.ogg"/>
   <property name="name" value="Grove 01"/>
  </properties>
- <tileset firstgid="1" source="tiles/forest.png.tsx"/>
- <tileset firstgid="324" source="tiles/objects.png.tsx"/>
+ <tileset firstgid="1" source="tiles/forest.png.json"/>
+ <tileset firstgid="324" source="tiles/objects.png.json"/>
  <layer name="Tiles(-0.5) (Grass)" width="34" height="33">
   <properties>
    <property name="layer" value="-0.5"/>

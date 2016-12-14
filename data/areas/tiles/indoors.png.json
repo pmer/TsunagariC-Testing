@@ -1,0 +1,22 @@
+{
+    "image": "indoors.png",
+    "imageheight": 192,
+    "imagewidth": 112,
+    "name": "indoors.png",
+    "tileheight": 16,
+    "tileproperties": {
+        "13": {
+            "frames": "13,20",
+            "speed": "1.5"
+        },
+        "27": {
+            "frames": "27,34",
+            "speed": "1.5"
+        },
+        "41": {
+            "frames": "41,48",
+            "speed": "1.5"
+        }
+    },
+    "tilewidth": 16
+}

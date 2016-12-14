@@ -1,0 +1,14 @@
+{
+    "image": "forest.png",
+    "imageheight": 304,
+    "imagewidth": 272,
+    "name": "forest.png",
+    "tileheight": 16,
+    "tileproperties": {
+        "29": {
+            "frames": "29,58",
+            "speed": "0.75"
+        }
+    },
+    "tilewidth": 16
+}

@@ -1,0 +1,14 @@
+{
+    "image": "objects.png",
+    "imageheight": 112,
+    "imagewidth": 112,
+    "name": "objects.png",
+    "tileheight": 16,
+    "tileproperties": {
+        "1": {
+            "frames": "1,8,15",
+            "speed": "1.5"
+        }
+    },
+    "tilewidth": 16
+}
