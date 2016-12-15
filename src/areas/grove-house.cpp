@@ -53,7 +53,7 @@ class grove_house : public DataArea {
 
         // closed exit on north wall, property layer
         auto door_prop = area->getTile(4, 0, 0.0);
-        door_prop->setNormalExit(Exit("areas/secret_room.tmx", 4, 5, 0.0));
+        door_prop->setNormalExit(Exit("areas/secret_room.json", 4, 5, 0.0));
         door_prop->flagManip().setNowalk(false);
 
         auto tileSet = area->getTileSet("areas/tiles/indoors.png");

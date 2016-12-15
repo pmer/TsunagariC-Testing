@@ -60,18 +60,18 @@ TestingDataWorld::TestingDataWorld() {
     parameters.gameStart.player.file = "entities/player/player.json";
     parameters.gameStart.player.phase = "down";
 
-    parameters.gameStart.area = "areas/grove01.tmx";
+    parameters.gameStart.area = "areas/grove01.json";
     parameters.gameStart.coords = { 15, 22, 0 };
 
     datafile = "./testing.world";
 
-    areas["areas/cave01.tmx"] = std::make_shared<cave01>();
-    areas["areas/bigtree.tmx"] = std::make_shared<BigTreeArea>();
-    areas["areas/grove_house.tmx"] = std::make_shared<grove_house>();
-    areas["areas/grove01.tmx"] = std::make_shared<grove01>();
-    areas["areas/grove04.tmx"] = std::make_shared<grove04>();
-    areas["areas/grove06.tmx"] = std::make_shared<grove06>();
-    areas["areas/secret_room.tmx"] = std::make_shared<secret_room>();
+    areas["areas/cave01.json"] = std::make_shared<cave01>();
+    areas["areas/bigtree.json"] = std::make_shared<BigTreeArea>();
+    areas["areas/grove_house.json"] = std::make_shared<grove_house>();
+    areas["areas/grove01.json"] = std::make_shared<grove01>();
+    areas["areas/grove04.json"] = std::make_shared<grove04>();
+    areas["areas/grove06.json"] = std::make_shared<grove06>();
+    areas["areas/secret_room.json"] = std::make_shared<secret_room>();
 }
 
 TestingDataWorld::~TestingDataWorld() {

@@ -1,0 +1,272 @@
+{
+    "height": 6,
+    "layers": [{
+        "data": [7, 7, 7, 7, 7, 7, 7, 7, 69, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
+        "height": 6,
+        "name": "Tiles(-0.3)",
+        "opacity": 1,
+        "properties": {
+            "depth": "-0.3"
+        },
+        "propertytypes": {
+            "depth": "string"
+        },
+        "type": "tilelayer",
+        "visible": true,
+        "width": 6,
+        "x": 0,
+        "y": 0
+    }, {
+        "data": [29, 30, 30, 30, 30, 31, 36, 259, 0, 107, 106, 38, 36, 0, 0, 0, 122, 38, 36, 200, 201, 202, 0, 38, 36, 211, 212, 213, 122, 38, 43, 44, 44, 44, 44, 45],
+        "height": 6,
+        "name": "Tiles(-0.2)",
+        "opacity": 1,
+        "properties": {
+            "depth": "-0.2"
+        },
+        "propertytypes": {
+            "depth": "string"
+        },
+        "type": "tilelayer",
+        "visible": true,
+        "width": 6,
+        "x": 0,
+        "y": 0
+    }, {
+        "data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 0, 41, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "height": 6,
+        "name": "Tiles(-0.1)",
+        "opacity": 1,
+        "properties": {
+            "depth": "-0.1"
+        },
+        "propertytypes": {
+            "depth": "string"
+        },
+        "type": "tilelayer",
+        "visible": true,
+        "width": 6,
+        "x": 0,
+        "y": 0
+    }, {
+        "draworder": "topdown",
+        "height": 6,
+        "name": "Prop(0)",
+        "objects": [{
+            "height": 16,
+            "id": 1,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 96,
+            "x": 0,
+            "y": 0
+        }, {
+            "height": 16,
+            "id": 2,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 96,
+            "x": 0,
+            "y": 80
+        }, {
+            "height": 64,
+            "id": 3,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 0,
+            "y": 16
+        }, {
+            "height": 16,
+            "id": 4,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 64,
+            "y": 64
+        }, {
+            "height": 64,
+            "id": 5,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 80,
+            "y": 16
+        }, {
+            "height": 16,
+            "id": 6,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 16,
+            "y": 16
+        }, {
+            "height": 16,
+            "id": 7,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 32,
+            "x": 48,
+            "y": 16
+        }, {
+            "height": 16,
+            "id": 8,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 64,
+            "y": 32
+        }, {
+            "height": 16,
+            "id": 9,
+            "name": "",
+            "properties": {
+                "exit": "areas\/secret_room.json,2,3,0"
+            },
+            "propertytypes": {
+                "exit": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 64,
+            "y": 48
+        }, {
+            "height": 16,
+            "id": 10,
+            "name": "",
+            "properties": {
+                "exit": "areas\/cave01.json,6,9,0"
+            },
+            "propertytypes": {
+                "exit": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 32,
+            "y": 16
+        }],
+        "opacity": 1,
+        "properties": {
+            "depth": "0"
+        },
+        "propertytypes": {
+            "depth": "string"
+        },
+        "type": "objectgroup",
+        "visible": true,
+        "width": 6,
+        "x": 0,
+        "y": 0
+    }, {
+        "data": [0, 248, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "height": 6,
+        "name": "Tiles(0.1)",
+        "opacity": 1,
+        "properties": {
+            "depth": "0.1"
+        },
+        "propertytypes": {
+            "depth": "string"
+        },
+        "type": "tilelayer",
+        "visible": true,
+        "width": 6,
+        "x": 0,
+        "y": 0
+    }],
+    "nextobjectid": 11,
+    "orientation": "orthogonal",
+    "properties": {
+        "color_overlay": "150,0,10,30",
+        "main_music": "",
+        "name": "Basement"
+    },
+    "propertytypes": {
+        "color_overlay": "string",
+        "main_music": "string",
+        "name": "string"
+    },
+    "renderorder": "right-down",
+    "tileheight": 16,
+    "tilesets": [{
+        "firstgid": 1,
+        "source": "tiles\/indoors.png.json"
+    }, {
+        "firstgid": 85,
+        "source": "tiles\/objects.png.json"
+    }, {
+        "firstgid": 134,
+        "source": "tiles\/indoors_2.png.json"
+    }],
+    "tilewidth": 16,
+    "version": 1,
+    "width": 6
+}

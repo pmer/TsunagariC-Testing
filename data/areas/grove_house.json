@@ -1,0 +1,365 @@
+{
+    "height": 10,
+    "layers": [{
+        "data": [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 4, 5, 5, 5, 6, 7, 7, 7, 7, 7, 11, 12, 12, 12, 13, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
+        "height": 10,
+        "name": "Tiles(-0.3)",
+        "opacity": 1,
+        "properties": {
+            "depth": "-0.3"
+        },
+        "propertytypes": {
+            "depth": "string"
+        },
+        "type": "tilelayer",
+        "visible": true,
+        "width": 10,
+        "x": 0,
+        "y": 0
+    }, {
+        "data": [29, 30, 30, 30, 37, 30, 30, 30, 30, 31, 36, 33, 0, 0, 0, 0, 0, 0, 0, 38, 36, 40, 0, 0, 0, 0, 0, 0, 0, 38, 36, 0, 0, 0, 23, 23, 0, 0, 0, 38, 36, 0, 0, 0, 0, 0, 0, 0, 0, 38, 36, 0, 25, 211, 212, 212, 213, 24, 0, 38, 36, 0, 0, 0, 0, 0, 0, 0, 0, 38, 36, 0, 0, 0, 0, 0, 0, 0, 0, 38, 36, 0, 0, 0, 0, 0, 0, 0, 0, 38, 43, 44, 44, 44, 44, 0, 44, 44, 44, 45],
+        "height": 10,
+        "name": "Tiles(-0.2)",
+        "opacity": 1,
+        "properties": {
+            "depth": "-0.2"
+        },
+        "propertytypes": {
+            "depth": "string"
+        },
+        "type": "tilelayer",
+        "visible": true,
+        "width": 10,
+        "x": 0,
+        "y": 0
+    }, {
+        "data": [0, 58, 28, 0, 0, 0, 14, 32, 46, 47, 0, 0, 0, 0, 0, 0, 0, 39, 53, 54, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "height": 10,
+        "name": "Tiles(-0.1)",
+        "opacity": 1,
+        "properties": {
+            "depth": "-0.1"
+        },
+        "propertytypes": {
+            "depth": "string"
+        },
+        "type": "tilelayer",
+        "visible": true,
+        "width": 10,
+        "x": 0,
+        "y": 0
+    }, {
+        "draworder": "topdown",
+        "height": 0,
+        "name": "Prop(0)",
+        "objects": [{
+            "height": 16,
+            "id": 1,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 160,
+            "x": 0,
+            "y": 0
+        }, {
+            "height": 144,
+            "id": 2,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 0,
+            "y": 16
+        }, {
+            "height": 16,
+            "id": 3,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 64,
+            "x": 16,
+            "y": 144
+        }, {
+            "height": 32,
+            "id": 4,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 16,
+            "y": 16
+        }, {
+            "height": 16,
+            "id": 5,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 64,
+            "x": 96,
+            "y": 144
+        }, {
+            "height": 128,
+            "id": 6,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 144,
+            "y": 16
+        }, {
+            "height": 16,
+            "id": 7,
+            "name": "",
+            "properties": {
+                "flags": "nowalk",
+                "on_use": "sound_book"
+            },
+            "propertytypes": {
+                "flags": "string",
+                "on_use": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 128,
+            "y": 16
+        }, {
+            "height": 32,
+            "id": 8,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 64,
+            "x": 48,
+            "y": 64
+        }, {
+            "height": 16,
+            "id": 9,
+            "name": "",
+            "properties": {
+                "on_use": "open_door"
+            },
+            "propertytypes": {
+                "on_use": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 96,
+            "y": 0
+        }, {
+            "height": 16,
+            "id": 10,
+            "name": "",
+            "properties": {
+                "exit:down": "areas\/grove01.json,15,22,0"
+            },
+            "propertytypes": {
+                "exit:down": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 80,
+            "y": 144
+        }, {
+            "height": 16,
+            "id": 11,
+            "name": "",
+            "properties": {
+                "flags": "nowalk",
+                "on_use": "sound_armor"
+            },
+            "propertytypes": {
+                "flags": "string",
+                "on_use": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 112,
+            "y": 16
+        }, {
+            "height": 16,
+            "id": 12,
+            "name": "",
+            "properties": {
+                "on_use": "sound_ouch"
+            },
+            "propertytypes": {
+                "on_use": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 32,
+            "y": 0
+        }, {
+            "height": 16,
+            "id": 13,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 32,
+            "y": 80
+        }, {
+            "height": 16,
+            "id": 14,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 16,
+            "x": 112,
+            "y": 80
+        }, {
+            "height": 16,
+            "id": 15,
+            "name": "",
+            "properties": {
+                "flags": "nowalk"
+            },
+            "propertytypes": {
+                "flags": "string"
+            },
+            "rotation": 0,
+            "type": "",
+            "visible": true,
+            "width": 32,
+            "x": 64,
+            "y": 48
+        }],
+        "opacity": 1,
+        "properties": {
+            "depth": "0"
+        },
+        "propertytypes": {
+            "depth": "string"
+        },
+        "type": "objectgroup",
+        "visible": true,
+        "width": 0,
+        "x": 0,
+        "y": 0
+    }, {
+        "data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 200, 201, 201, 202, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "height": 10,
+        "name": "Tiles(0.1)",
+        "opacity": 1,
+        "properties": {
+            "depth": "0.1"
+        },
+        "propertytypes": {
+            "depth": "string"
+        },
+        "type": "tilelayer",
+        "visible": true,
+        "width": 10,
+        "x": 0,
+        "y": 0
+    }, {
+        "data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 206, 176, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "height": 10,
+        "name": "Tiles(0.2)",
+        "opacity": 1,
+        "properties": {
+            "depth": "0.2"
+        },
+        "propertytypes": {
+            "depth": "string"
+        },
+        "type": "tilelayer",
+        "visible": true,
+        "width": 10,
+        "x": 0,
+        "y": 0
+    }],
+    "nextobjectid": 16,
+    "orientation": "orthogonal",
+    "properties": {
+        "name": "Grove House"
+    },
+    "propertytypes": {
+        "name": "string"
+    },
+    "renderorder": "right-down",
+    "tileheight": 16,
+    "tilesets": [{
+        "firstgid": 1,
+        "source": "tiles\/indoors.png.json"
+    }, {
+        "firstgid": 85,
+        "source": "tiles\/indoors_2.png.json"
+    }],
+    "tilewidth": 16,
+    "version": 1,
+    "width": 10
+}
