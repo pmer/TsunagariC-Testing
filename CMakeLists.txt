@@ -10,5 +10,5 @@ else()
     set(EXE_NAME "tsunagari")
 endif()
 
-add_executable(${EXE_NAME} ${GUI_TYPE} ${TSUNAGARIC_TESTING_SOURCES} ${TSUNAGARIC_SOURCES} TsunagariC/src/pack/pack.h TsunagariC/src/pack/pack.cpp)
+add_executable(${EXE_NAME} ${GUI_TYPE} ${TSUNAGARIC_TESTING_SOURCES} ${TSUNAGARIC_SOURCES})
 target_link_libraries(${EXE_NAME} ${TSUNAGARIC_LIBRARIES})
