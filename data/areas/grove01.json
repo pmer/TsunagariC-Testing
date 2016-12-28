@@ -1215,7 +1215,7 @@
     "nextobjectid": 92,
     "orientation": "orthogonal",
     "properties": {
-        "main_music": "music\/Autumn_Forest.oga",
+        "music": "music\/Autumn_Forest.oga",
         "name": "Grove 01"
     },
     "tileheight": 16,
