@@ -1,5 +1,7 @@
 # TsunagariC-Testing
 
+[![Build Status](https://travis-ci.org/pmer/TsunagariC-Testing.svg?branch=master)](https://travis-ci.org/pmer/TsunagariC-Testing)
+
 A tech demo world for [TsunagariC](https://github.com/pmer/TsunagariC).
 
 ## Setup
