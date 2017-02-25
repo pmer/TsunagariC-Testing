@@ -1,10 +1,13 @@
 language: cpp
 
-os: osx
-
-cpp:
-  - clang
-  - gcc
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode8.2
+      compiler: clang
+    - os: osx
+      osx_image: xcode8.2
+      compiler: gcc
 
 before_install:
   - brew install libgosu
