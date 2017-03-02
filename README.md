@@ -1,6 +1,8 @@
 # TsunagariC-Testing
 
+![MIT Licensed](https://img.shields.io/github/license/pmer/TsunagariC-Testing.svg)
 [![Build Status](https://travis-ci.org/pmer/TsunagariC-Testing.svg?branch=master)](https://travis-ci.org/pmer/TsunagariC-Testing)
+[![LoC](https://tokei.rs/b1/github/pmer/TsunagariC-Testing)](https://github.com/Aaronepower/tokei)
 
 A tech demo world for [TsunagariC](https://github.com/pmer/TsunagariC).
 
