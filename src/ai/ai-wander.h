@@ -31,7 +31,6 @@
 // The wander AI moves characters around in a Pokemon-style fashion.  Every
 // once in a while they will move in a random direction by one tile.
 
-#include <stdlib.h>
 #include <time.h>
 
 #include <functional>
@@ -44,11 +43,11 @@ class Character;
 //! one tile every `tryEvery` milliseconds.  There is a 1-in-`chance` chance
 //! that the character will move during a try.
 std::function<void(time_t)>
-AIWanderTile(Rc<Character> c, int chance, time_t tryEvery);
+AIWanderTile(Character* c, int chance, time_t tryEvery);
 
 //! Returns a function that will try to move the character one tile every turn.
 //! There is a 1-in-`chance` chance that the character will move during a try.
 std::function<void()>
-AIWanderTurn(Rc<Character> c, int chance);
+AIWanderTurn(Character* c, int chance);
 
 #endif  // SRC_AI_AI_WANDER_H_

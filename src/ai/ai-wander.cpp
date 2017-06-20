@@ -1,9 +1,9 @@
-/**********************************
-** Tsunagari Tile Engine         **
-** ai-wander.cpp                 **
-** Copyright 2014 PariahSoft LLC **
-** Copyright 2016 Paul Merrill   **
-**********************************/
+/*************************************
+** Tsunagari Tile Engine            **
+** ai-wander.cpp                    **
+** Copyright 2014 Michael Riley     **
+** Copyright 2014-2017 Paul Merrill **
+*************************************/
 
 // **********
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -47,18 +47,18 @@ static ivec2 randomFacing() {
 }
 
 //! Move the character.
-static void doMove(Rc<Character> c) {
+static void doMove(Character* c) {
     c->moveByTile(randomFacing());
 }
 
 //! Change direction we are facing.
-static void doFace(Rc<Character>& c) {
+static void doFace(Character* c) {
     c->setFacing(randomFacing());
     c->setAnimationStanding();
 }
 
 //! Decide whether or not to move.
-static void maybeMove(Rc<Character>& c, int chance) {
+static void maybeMove(Character* c, int chance) {
     if (randInt(1, chance) == 1) {
         //doMove(c.lock());
         doMove(c);
@@ -69,17 +69,11 @@ static void maybeMove(Rc<Character>& c, int chance) {
 }
 
 std::function<void(time_t)>
-AIWanderTile(Rc<Character> c, int chance, time_t tryEvery) {
+AIWanderTile(Character* c, int chance, time_t tryEvery) {
     assert(conf.moveMode == TILE);
 
     Cooldown cooldown(tryEvery);
     return [c, chance, cooldown] (time_t dt) mutable {
-        /*
-        if (c.expired()) {
-            Log::err("AIWanderTile", "Character expired");
-            return;
-        }
-        */
         cooldown.advance(dt);
         if (cooldown.hasExpired()) {
             cooldown.wrap();
@@ -89,16 +83,10 @@ AIWanderTile(Rc<Character> c, int chance, time_t tryEvery) {
 }
 
 std::function<void()>
-AIWanderTurn(Rc<Character> c, int chance) {
+AIWanderTurn(Character* c, int chance) {
     assert(conf.moveMode == TURN);
 
     return [c, chance] () mutable {
-        /*
-        if (c.expired()) {
-            Log::err("AIWanderTurn", "Character expired");
-            return;
-        }
-        */
         maybeMove(c, chance);
     };
 }

@@ -60,7 +60,7 @@ class grove01 : public DataArea {
         // Create a wandering wizard NPC.
         auto wizard = area->spawnNPC("entities/wizard/wizard.json",
                                      vicoord(16, 22, 0.0), "down");
-        wizard->attach(AIWanderTile(wizard, 4, 1000));
+        wizard->attach(AIWanderTile(wizard.get(), 4, 1000));
 
         // And a few drifting cloud Overlays.
         for (int i = 0; i < 5; i++) {
