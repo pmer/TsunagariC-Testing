@@ -34,7 +34,7 @@
 
 #include "core/area.h"
 #include "core/formatter.h"
-#include "core/random.h"
+#include "util/random.h"
 
 Clouds::Clouds()
     : z(0.0) {

@@ -32,8 +32,8 @@
 #include "core/character.h"
 #include "core/client-conf.h"
 #include "core/cooldown.h"
-#include "core/random.h"
 #include "util/assert.h"
+#include "util/random.h"
 
 static ivec2 randomFacing() {
     switch (randInt(0, 3)) {
