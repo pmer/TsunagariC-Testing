@@ -27,14 +27,13 @@
 
 #include "ai/ai-wander.h"
 
-#include <assert.h>
-
 #include <algorithm>
 
 #include "core/character.h"
 #include "core/client-conf.h"
 #include "core/cooldown.h"
 #include "core/random.h"
+#include "util/assert.h"
 
 static ivec2 randomFacing() {
     switch (randInt(0, 3)) {
@@ -70,7 +69,7 @@ static void maybeMove(Character* c, int chance) {
 
 std::function<void(time_t)>
 AIWanderTile(Character* c, int chance, time_t tryEvery) {
-    assert(conf.moveMode == TILE);
+    assert_(conf.moveMode == TILE);
 
     Cooldown cooldown(tryEvery);
     return [c, chance, cooldown] (time_t dt) mutable {
@@ -84,7 +83,7 @@ AIWanderTile(Character* c, int chance, time_t tryEvery) {
 
 std::function<void()>
 AIWanderTurn(Character* c, int chance) {
-    assert(conf.moveMode == TURN);
+    assert_(conf.moveMode == TURN);
 
     return [c, chance] () mutable {
         maybeMove(c, chance);
