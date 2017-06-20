@@ -33,7 +33,7 @@
 #include "core/overlay.h"
 #include "core/vec.h"
 #include "data/data-area.h"
-#include "util/memory.h"
+#include "util/rc.h"
 
 //! Create clouds that drift left across an Area.
 class Clouds {

@@ -35,7 +35,7 @@
 
 #include <functional>
 
-#include "util/memory.h"
+#include "util/move.h"
 
 class Character;
 
