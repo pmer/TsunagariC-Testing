@@ -30,8 +30,6 @@
 #include "core/log.h"
 #include "core/music.h"
 #include "core/npc.h"
-#include "core/overlay.h"
-#include "core/vec.h"
 #include "data/data-area.h"
 
 #include "ai/ai-wander.h"

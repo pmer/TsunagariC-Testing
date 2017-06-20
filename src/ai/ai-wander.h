@@ -35,7 +35,8 @@
 #include <time.h>
 
 #include <functional>
-#include <memory>
+
+#include "util/memory.h"
 
 class Character;
 
@@ -43,11 +44,11 @@ class Character;
 //! one tile every `tryEvery` milliseconds.  There is a 1-in-`chance` chance
 //! that the character will move during a try.
 std::function<void(time_t)>
-AIWanderTile(std::weak_ptr<Character> c, int chance, time_t tryEvery);
+AIWanderTile(Rc<Character> c, int chance, time_t tryEvery);
 
 //! Returns a function that will try to move the character one tile every turn.
 //! There is a 1-in-`chance` chance that the character will move during a try.
 std::function<void()>
-AIWanderTurn(std::weak_ptr<Character> c, int chance);
+AIWanderTurn(Rc<Character> c, int chance);
 
 #endif  // SRC_AI_AI_WANDER_H_
