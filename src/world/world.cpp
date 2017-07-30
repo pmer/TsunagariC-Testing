@@ -1,9 +1,9 @@
-/**********************************
-** Tsunagari Tile Engine         **
-** world.cpp                     **
-** Copyright 2014 PariahSoft LLC **
-** Copyright 2016 Paul Merrill   **
-**********************************/
+/***************************************
+** Tsunagari Tile Engine              **
+** world.cpp                          **
+** Copyright 2014      PariahSoft LLC **
+** Copyright 2016-2017 Paul Merrill   **
+***************************************/
 
 // **********
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -65,13 +65,13 @@ TestingDataWorld::TestingDataWorld() {
 
     datafile = "./testing.world";
 
-    areas["areas/cave01.json"] = std::make_shared<cave01>();
-    areas["areas/bigtree.json"] = std::make_shared<BigTreeArea>();
-    areas["areas/grove_house.json"] = std::make_shared<grove_house>();
-    areas["areas/grove01.json"] = std::make_shared<grove01>();
-    areas["areas/grove04.json"] = std::make_shared<grove04>();
-    areas["areas/grove06.json"] = std::make_shared<grove06>();
-    areas["areas/secret_room.json"] = std::make_shared<secret_room>();
+    areas["areas/cave01.json"] = new cave01();
+    areas["areas/bigtree.json"] = new BigTreeArea();
+    areas["areas/grove_house.json"] = new grove_house();
+    areas["areas/grove01.json"] = new grove01();
+    areas["areas/grove04.json"] = new grove04();
+    areas["areas/grove06.json"] = new grove06();
+    areas["areas/secret_room.json"] = new secret_room();
 }
 
 TestingDataWorld::~TestingDataWorld() {
