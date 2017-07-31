@@ -48,18 +48,18 @@ class grove_house : public DataArea {
         openedDoor = true;
 
         // torch which activated this trigger should make "ouch" now
-        auto torch_prop = area->getTile(6, 0, 0.0);
+        auto torch_prop = area->getTile(vicoord(6, 0, 0.0));
         torch_prop->useScript = scripts["sound_ouch"];
 
         // closed exit on north wall, property layer
-        auto door_prop = area->getTile(4, 0, 0.0);
+        auto door_prop = area->getTile(vicoord(4, 0, 0.0));
         door_prop->setNormalExit(Exit("areas/secret_room.json", 4, 5, 0.0));
         door_prop->flagManip().setNowalk(false);
 
         auto tileSet = area->getTileSet("areas/tiles/indoors.png");
 
         // closed exit on north wall, graphics layer
-        auto door_graph = area->getTile(4, 0, -0.2);
+        auto door_graph = area->getTile(vicoord(4, 0, -0.2));
         // change to open exit
         door_graph->setType(tileSet->at(2, 9));
 

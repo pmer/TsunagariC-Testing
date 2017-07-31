@@ -111,7 +111,7 @@ class grove01 : public DataArea {
         }
 
         openedChest = true;
-        auto tile = area->getTile(5, 21, -0.1);  // closed chest
+        auto tile = area->getTile(vicoord(5, 21, -0.1));  // closed chest
         auto tile2 = tile->offset(0, -1);  // above the closed chest
         auto objects = area->getTileSet("areas/tiles/objects.png");
 
