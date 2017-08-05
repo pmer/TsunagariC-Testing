@@ -50,7 +50,7 @@ struct TimelineItem {
     Unique<DataExpr> expr;
 };
 
-typedef std::vector<TimelineItem> Timeline;
+typedef vector<TimelineItem> Timeline;
 
 
 class SetPlayerFreezeExpr : public DataExpr {};

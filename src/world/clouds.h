@@ -28,12 +28,11 @@
 #ifndef SRC_WORLD_CLOUDS_H_
 #define SRC_WORLD_CLOUDS_H_
 
-#include <vector>
-
 #include "core/overlay.h"
 #include "core/vec.h"
 #include "data/data-area.h"
 #include "util/rc.h"
+#include "util/vector.h"
 
 //! Create clouds that drift left across an Area.
 class Clouds {
@@ -60,7 +59,7 @@ class Clouds {
 
     double z;
 
-    std::vector<Rc<Overlay>> clouds;
+    vector<Rc<Overlay>> clouds;
 };
 
 #endif  // SRC_WORLD_CLOUDS_H_
