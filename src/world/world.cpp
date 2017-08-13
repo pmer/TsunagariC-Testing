@@ -70,13 +70,13 @@ TestingDataWorld::TestingDataWorld() {
 
     datafile = "./testing.world";
 
-    areas["areas/cave01.json"] = new cave01();
-    areas["areas/bigtree.json"] = new BigTreeArea();
-    areas["areas/grove_house.json"] = new grove_house();
-    areas["areas/grove01.json"] = new grove01();
-    areas["areas/grove04.json"] = new grove04();
-    areas["areas/grove06.json"] = new grove06();
-    areas["areas/secret_room.json"] = new secret_room();
+    areas["areas/cave01.json"] = new cave01;
+    areas["areas/bigtree.json"] = new BigTreeArea;
+    areas["areas/grove_house.json"] = new grove_house;
+    areas["areas/grove01.json"] = new grove01;
+    areas["areas/grove04.json"] = new grove04;
+    areas["areas/grove06.json"] = new grove06;
+    areas["areas/secret_room.json"] = new secret_room;
 }
 
 bool TestingDataWorld::init() {
