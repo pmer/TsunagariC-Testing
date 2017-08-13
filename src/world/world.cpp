@@ -1,8 +1,8 @@
 /***************************************
 ** Tsunagari Tile Engine              **
 ** world.cpp                          **
-** Copyright 2014      PariahSoft LLC **
-** Copyright 2016-2017 Paul Merrill   **
+** Copyright 2014      Michael Reiley **
+** Copyright 2014-2017 Paul Merrill   **
 ***************************************/
 
 // **********
