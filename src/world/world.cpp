@@ -38,12 +38,8 @@
 #include "areas/secret-room.cpp"
 
 
-static TestingDataWorld* globalTestingDataWorld = nullptr;
-
 DataWorld& DataWorld::instance() {
-    if (globalTestingDataWorld == nullptr) {
-        globalTestingDataWorld = new TestingDataWorld;
-    }
+    static auto globalTestingDataWorld = new TestingDataWorld;
     return *globalTestingDataWorld;
 }
 
