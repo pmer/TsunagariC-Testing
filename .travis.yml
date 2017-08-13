@@ -10,7 +10,7 @@ matrix:
       compiler: gcc
 
 before_install:
-  - brew install libgosu
+  - brew install libgosu sdl2_mixer
 
 install:
   - mkdir build
