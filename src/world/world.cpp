@@ -38,14 +38,19 @@
 #include "areas/secret-room.cpp"
 
 
-static TestingDataWorld globalTestingDataWorld;
+static TestingDataWorld* globalTestingDataWorld = nullptr;
 
 DataWorld& DataWorld::instance() {
-    return globalTestingDataWorld;
+    if (globalTestingDataWorld == nullptr) {
+        globalTestingDataWorld = new TestingDataWorld;
+    }
+    return *globalTestingDataWorld;
 }
 
 
 TestingDataWorld::TestingDataWorld() {
+    Log::info("TestingDataWorld", "Hello!");
+
     about.name = "Testing World";
     about.author = "Michael Reiley and Paul Merrill";
     about.version = "1";
@@ -78,6 +83,6 @@ TestingDataWorld::~TestingDataWorld() {
 }
 
 bool TestingDataWorld::init() {
-    Log::info("TestingDataWorld", "Hello!");
+    Log::info("TestingDataWorld", "Ready to go");
     return true;
 }
