@@ -33,7 +33,6 @@
 class TestingDataWorld : public DataWorld {
  public:
     TestingDataWorld();
-    ~TestingDataWorld();
 
     bool init();
 };

@@ -79,9 +79,6 @@ TestingDataWorld::TestingDataWorld() {
     areas["areas/secret_room.json"] = new secret_room();
 }
 
-TestingDataWorld::~TestingDataWorld() {
-}
-
 bool TestingDataWorld::init() {
     Log::info("TestingDataWorld", "Ready to go");
     return true;
