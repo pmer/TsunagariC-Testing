@@ -99,7 +99,7 @@ class grove01 : public DataArea {
     }
 
     void onOpenChest(Entity&, Tile&) {
-        /* This function is called when the chest in grove01.tmx is
+        /* This function is called when the chest in grove01.json is
          * activated by the player. The first time we are run, we open
          * the chest.  Further invocations feature an easter egg where
          * we toggle the game's music. :)
@@ -111,8 +111,8 @@ class grove01 : public DataArea {
         }
 
         openedChest = true;
-        auto tile = area->getTile(vicoord(5, 21, -0.1));  // closed chest
-        auto tile2 = tile->offset(0, -1);  // above the closed chest
+        auto tile = area->getTile(vicoord(5, 21, -0.1));   // closed chest
+        auto tile2 = area->getTile(vicoord(5, 20, -0.1));  // above the closed chest
         auto objects = area->getTileSet("areas/tiles/objects.png");
 
         // Change to open chest, bottom and top halves.
