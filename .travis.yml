@@ -3,10 +3,10 @@ language: cpp
 matrix:
   include:
     - os: osx
-      osx_image: xcode8.2
+      osx_image: xcode9.2
       compiler: clang
     - os: osx
-      osx_image: xcode8.2
+      osx_image: xcode9.2
       compiler: gcc
 
 before_install:
