@@ -1,11 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include "arr.h"
 
 extern char **environ;
 
-static char *tsunagariSources[] = {
+static char exe_tsunagari[] = "tsunagari";
+static char *sources_tsunagari[] = {
     "src/areas/grove-house.cpp",
     "src/areas/secret-room.cpp",
     "src/world/clouds.cpp",
@@ -57,7 +60,8 @@ static char *tsunagariSources[] = {
     "TsunagariC/src/util/transform.cpp",
 };
 
-static char *packToolSources[] = {
+static char exe_pack_tool[] = "pack-tool";
+static char *sources_pack_tool[] = {
     "TsunagariC/src/os/unix.cpp",
     "TsunagariC/src/pack/file-type.cpp",
     "TsunagariC/src/pack/main.cpp",
@@ -68,37 +72,35 @@ static char *packToolSources[] = {
     "TsunagariC/src/util/assert.cpp",
 };
 
-static char objectPrefixTsunagari[] = "CMakeFiles/tsunagari.dir/";
-static char objectPrefixPackTool[] = "CMakeFiles/pack-tool.dir/";
-static char objectSuffix[] = ".o";
+static char object_prefix_tsunagari[] = "CMakeFiles/tsunagari.dir/";
+static char object_prefix_pack_tool[] = "CMakeFiles/pack-tool.dir/";
+static char object_suffix[] = ".o";
 
-static char *argv[] = {
+static char *object_argv[] = {
         "/usr/bin/c++",
+        "-std=c++11",
+        "-I/usr/include/SDL2",
         "-ITsunagariC/deps/rapidjson/include",
         "-ITsunagariC/src",
-        "-I/usr/include/SDL2",
-        "-ITsunagariC/src/core",
         "-Isrc",
-        "-std=c++11",
         "-msse4.2",
-        "-Wall",
-        "-Wextra",
-        "-Wconversion",
-        "-Wdeprecated",
-        "-DBACKEND_SDL2",
         "-g",
-        "-o",
-        NULL,
-        "-c",
-        NULL,
-        NULL,
 };
-static int argvO = 15;
-static int argvC = 17;
+
+static void print_argv(char **argv) {
+    for (; *argv; argv++) {
+        printf("%s ", *argv);
+    }
+    printf("\n");
+}
 
 static void run(char **argv) {
     pid_t pid;
     int status;
+
+    if (getenv("VERBOSE")) {
+        print_argv(argv);
+    }
 
     pid = fork();
     if (pid == -1) {
@@ -125,20 +127,37 @@ static void run(char **argv) {
     }
 }
 
-static void compile(char *prefix, int prefixLen, char *src, int srcLen) {
-    char o[128];
+static void object(arr *cxxflags, char *prefix, int prefix_len, char *src, int src_len) {
+    arr argv;
+    char o[128], **ss;
+    int i;
 
-    memcpy(o, prefix, prefixLen);
-    memcpy(o+prefixLen, src, srcLen);
-    memcpy(o+prefixLen+srcLen, objectSuffix, sizeof(objectSuffix)+1);
+    memcpy(o, prefix, prefix_len);
+    memcpy(o+prefix_len, src, src_len);
+    memcpy(o+prefix_len+src_len, object_suffix, sizeof(object_suffix)+1);
 
-    argv[argvO] = o;
-    argv[argvC] = src;
+    arr_construct_n(char *, &argv, 16);
 
-    run(argv);
+    for (i = 0; i < sizeof(object_argv) / sizeof(object_argv)[0]; i++) {
+        arr_push(char *, &argv, object_argv[i]);
+    }
+
+    for_each_in_arr(ss, cxxflags) {
+        arr_push(char *, &argv, *ss);
+    }
+
+    arr_push(char *, &argv, "-c");
+    arr_push(char *, &argv, src);
+    arr_push(char *, &argv, "-o");
+    arr_push(char *, &argv, o);
+    arr_push(char *, &argv, NULL);
+
+    run(arr_array(char *, &argv));
+
+    arr_destroy(&argv);
 }
 
-static void link() {
+static void exe(char *out, char **srcs) {
     /*
     /usr/bin/c++
      -std=c++11
@@ -163,30 +182,56 @@ static void link() {
     */
 }
 
-/*
-/usr/bin/c++    -I/home/pdm/Source/TsunagariC-Testing/TsunagariC/deps/rapidjson/include -I/home/pdm/Source/TsunagariC-Testing/TsunagariC/src -I/usr/include/SDL2 -I/home/pdm/Source/TsunagariC-Testing/TsunagariC/src/core -I/home/pdm/Source/TsunagariC-Testing/src  -std=c++11 -msse4.2 -Wall -Wextra -Wconversion -Wdeprecated -DBACKEND_SDL2 -g   -o CMakeFiles/tsunagari.dir/TsunagariC/src/av/sdl2/sounds.cpp.o -c /home/pdm/Source/TsunagariC-Testing/TsunagariC/src/av/sdl2/sounds.cpp
+static void arr_split(arr *a, char *s) {
+    char *space;
 
-/usr/bin/c++    -std=c++11 -msse4.2 -Wall -Wextra -Wconversion -Wdeprecated -DBACKEND_SDL2 -g   CMakeFiles/tsunagari.dir/src/ai/ai-wander.cpp.o CMakeFiles/tsunagari.dir/src/areas/big-tree.cpp.o CMakeFiles/tsunagari.dir/src/areas/cave01.cpp.o CMakeFiles/tsunagari.dir/src/areas/grove01.cpp.o CMakeFiles/tsunagari.dir/src/areas/grove04.cpp.o CMakeFiles/tsunagari.dir/src/areas/grove06.cpp.o CMakeFiles/tsunagari.dir/src/areas/grove-house.cpp.o CMakeFiles/tsunagari.dir/src/areas/secret-room.cpp.o CMakeFiles/tsunagari.dir/src/world/clouds.cpp.o CMakeFiles/tsunagari.dir/src/world/world.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/main.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/nbcl/nbcl.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/av/sdl2/error.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/av/sdl2/images.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/av/sdl2/music.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/av/sdl2/sounds.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/av/sdl2/window.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/animation.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/area.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/area-json.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/character.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/client-conf.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/cooldown.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/display-list.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/entity.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/formatter.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/images.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/jsons.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/log.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/measure.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/music-impl.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/music-worker.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/npc.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/overlay.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/player.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/resources.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/sounds.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/tile.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/viewport.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/window.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/core/world.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/data/data-area.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/data/data-world.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/data/inprogress.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/os/unix.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/pack/file-type.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/pack/pack-file.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/resources/pack.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/util/assert.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/util/bitrecord.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/util/dispatch-queue.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/util/dispatch-queue-impl.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/util/random.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/util/string2.cpp.o CMakeFiles/tsunagari.dir/TsunagariC/src/util/transform.cpp.o  -o tsunagari -lSDL2 -lSDL2_image -lSDL2 -lSDL2_mixer -lSDL2 -lpthread -lSDL2_image -lSDL2_mixer
-/usr/bin/c++    -std=c++11 -msse4.2 -Wall -Wextra -Wconversion -Wdeprecated -DBACKEND_SDL2 -g   CMakeFiles/pack-tool.dir/TsunagariC/src/os/unix.cpp.o CMakeFiles/pack-tool.dir/TsunagariC/src/pack/file-type.cpp.o CMakeFiles/pack-tool.dir/TsunagariC/src/pack/main.cpp.o CMakeFiles/pack-tool.dir/TsunagariC/src/pack/pack-file.cpp.o CMakeFiles/pack-tool.dir/TsunagariC/src/pack/pool.cpp.o CMakeFiles/pack-tool.dir/TsunagariC/src/pack/ui-log.cpp.o CMakeFiles/pack-tool.dir/TsunagariC/src/pack/walker.cpp.o CMakeFiles/pack-tool.dir/TsunagariC/src/util/assert.cpp.o  -o pack-tool -lpthread
-*/
+    if (!s) {
+        return;
+    }
 
+    space = strchr(s, ' ');
+    while (space) {
+        if (space - s != 0) {
+            arr_push(char *, a, strndup(s, space - s));
+        }
+        s = space + 1;
+        space = strchr(s, ' ');
+    }
 
+    if (*s != '\0') {
+        arr_push(char *, a, strdup(s));
+    }
+}
 
-int main(int argc, char* argv) {
+int main() {
+    arr cxxflags;
     int i;
-    char *src;
+    char *src, **ss;
 
-    for (i = 0; i < sizeof(tsunagariSources) / sizeof(tsunagariSources[0]); i++) {
-        src = tsunagariSources[i];
+    arr_construct(&cxxflags);
+    arr_split(&cxxflags, getenv("CXXFLAGS"));
+
+    for (i = 0; i < sizeof(sources_tsunagari) / sizeof(sources_tsunagari[0]); i++) {
+        src = sources_tsunagari[i];
         puts(src);
-        compile(objectPrefixTsunagari, sizeof(objectPrefixTsunagari)-1, src, strlen(src));
+        object(&cxxflags, object_prefix_tsunagari, sizeof(object_prefix_tsunagari)-1, src, strlen(src));
     }
 
-    for (i = 0; i < sizeof(packToolSources) / sizeof(packToolSources[0]); i++) {
-        src = packToolSources[i];
+    exe(exe_tsunagari, sources_tsunagari);
+
+    for (i = 0; i < sizeof(sources_pack_tool) / sizeof(sources_pack_tool[0]); i++) {
+        src = sources_pack_tool[i];
         puts(src);
-        compile(objectPrefixPackTool, sizeof(objectPrefixPackTool)-1, src, strlen(src));
+        object(&cxxflags, object_prefix_pack_tool, sizeof(object_prefix_pack_tool)-1, src, strlen(src));
     }
+
+    exe(exe_pack_tool, sources_pack_tool);
+
+    for_each_in_arr(ss, &cxxflags) {
+        free(*ss);
+    }
+
+    arr_destroy(&cxxflags);
 
     return 0;
 }
