@@ -77,14 +77,20 @@ static char object_prefix_pack_tool[] = "CMakeFiles/pack-tool.dir/";
 static char object_suffix[] = ".o";
 
 static char *object_argv[] = {
-        "/usr/bin/c++",
-        "-std=c++11",
-        "-I/usr/include/SDL2",
-        "-ITsunagariC/deps/rapidjson/include",
-        "-ITsunagariC/src",
-        "-Isrc",
-        "-msse4.2",
-        "-g",
+    "/usr/bin/c++",
+    "-I/usr/include/SDL2",
+    "-ITsunagariC/deps/rapidjson/include",
+    "-ITsunagariC/src",
+    "-Isrc",
+    "-std=c++11",
+    "-msse4.2",
+    "-g",
+};
+
+static char *exe_argv[] = {
+    "/usr/bin/c++",
+    "-g",
+    "-lpthread",
 };
 
 static void print_argv(char **argv) {
@@ -132,10 +138,6 @@ static void object(arr *cxxflags, char *prefix, int prefix_len, char *src, int s
     char o[128], **ss;
     int i;
 
-    memcpy(o, prefix, prefix_len);
-    memcpy(o+prefix_len, src, src_len);
-    memcpy(o+prefix_len+src_len, object_suffix, sizeof(object_suffix)+1);
-
     arr_construct_n(char *, &argv, 16);
 
     for (i = 0; i < sizeof(object_argv) / sizeof(object_argv)[0]; i++) {
@@ -146,40 +148,52 @@ static void object(arr *cxxflags, char *prefix, int prefix_len, char *src, int s
         arr_push(char *, &argv, *ss);
     }
 
+    memcpy(o, prefix, prefix_len);
+    memcpy(o+prefix_len, src, src_len);
+    memcpy(o+prefix_len+src_len, object_suffix, sizeof(object_suffix)+1);
+
     arr_push(char *, &argv, "-c");
     arr_push(char *, &argv, src);
     arr_push(char *, &argv, "-o");
     arr_push(char *, &argv, o);
-    arr_push(char *, &argv, NULL);
 
-    run(arr_array(char *, &argv));
+    run(arr_zarray(char *, &argv));
 
     arr_destroy(&argv);
 }
 
-static void exe(char *out, char **srcs) {
-    /*
-    /usr/bin/c++
-     -std=c++11
-     -msse4.2
-     -Wall
-     -Wextra
-     -Wconversion
-     -Wdeprecated
-     -DBACKEND_SDL2
-     -g
-     CMakeFiles/pack-tool.dir/TsunagariC/src/os/unix.cpp.o
-     CMakeFiles/pack-tool.dir/TsunagariC/src/pack/file-type.cpp.o
-     CMakeFiles/pack-tool.dir/TsunagariC/src/pack/main.cpp.o
-     CMakeFiles/pack-tool.dir/TsunagariC/src/pack/pack-file.cpp.o
-     CMakeFiles/pack-tool.dir/TsunagariC/src/pack/pool.cpp.o
-     CMakeFiles/pack-tool.dir/TsunagariC/src/pack/ui-log.cpp.o
-     CMakeFiles/pack-tool.dir/TsunagariC/src/pack/walker.cpp.o
-     CMakeFiles/pack-tool.dir/TsunagariC/src/util/assert.cpp.o
-     -o
-     pack-tool
-     -lpthread
-    */
+static void exe(char *out, char *prefix, int prefix_len, char **srcs, int srcs_len) {
+    arr argv, objects, object;
+    char **ss;
+    int i;
+
+    arr_construct_n(char *, &argv, 32);
+    arr_construct_n(char *, &objects, 32);
+
+    for (i = 0; i < sizeof(exe_argv) / sizeof(exe_argv)[0]; i++) {
+        arr_push(char *, &argv, exe_argv[i]);
+    }
+
+    for (i = 0; i < srcs_len; i++) {
+        arr_construct_n(char, &object, 128);
+        arr_push_mem(&object, prefix, prefix_len);
+        arr_push_zstr(&object, srcs[i]);
+        arr_push_array(&object, object_suffix);
+        arr_push(char *, &argv, arr_array(char, &object));
+        arr_push(char *, &objects, arr_array(char, &object));
+    }
+
+    arr_push(char *, &argv, "-o");
+    arr_push(char *, &argv, out);
+
+    run(arr_zarray(char *, &argv));
+
+    for_each_in_arr(ss, &objects) {
+        free(*ss);
+    }
+
+    arr_destroy(&objects);
+    arr_destroy(&argv);
 }
 
 static void arr_split(arr *a, char *s) {
@@ -217,7 +231,7 @@ int main() {
         object(&cxxflags, object_prefix_tsunagari, sizeof(object_prefix_tsunagari)-1, src, strlen(src));
     }
 
-    exe(exe_tsunagari, sources_tsunagari);
+    exe(exe_tsunagari, object_prefix_tsunagari, sizeof(object_prefix_tsunagari)-1, sources_tsunagari, sizeof(sources_tsunagari) / sizeof(sources_tsunagari[0]));
 
     for (i = 0; i < sizeof(sources_pack_tool) / sizeof(sources_pack_tool[0]); i++) {
         src = sources_pack_tool[i];
@@ -225,7 +239,7 @@ int main() {
         object(&cxxflags, object_prefix_pack_tool, sizeof(object_prefix_pack_tool)-1, src, strlen(src));
     }
 
-    exe(exe_pack_tool, sources_pack_tool);
+    exe(exe_pack_tool, object_prefix_pack_tool, sizeof(object_prefix_pack_tool)-1, sources_pack_tool, sizeof(sources_pack_tool) / sizeof(sources_pack_tool[0]));
 
     for_each_in_arr(ss, &cxxflags) {
         free(*ss);
