@@ -83,7 +83,7 @@ class grove01 : public DataArea {
         playSoundEffect("sounds/splash.oga");
 
         timerProgressAndThen(1000,
-            [this, maxAlpha] (double percent) {
+            [this] (double percent) {
                 uint8_t alpha;
                 if (percent < 0.5) {
                     alpha = (uint8_t)(maxAlpha * ease(2 * percent));
@@ -92,7 +92,7 @@ class grove01 : public DataArea {
                 }
                 area->setColorOverlay(alpha, 255, 255, 255);
             },
-            [this, maxAlpha] () {
+            [this] () {
                 area->setColorOverlay(0, 0, 0, 0);
                 drinking = false;
             });
