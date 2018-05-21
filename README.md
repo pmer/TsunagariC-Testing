@@ -11,7 +11,7 @@ A tech demo world for [TsunagariC](https://github.com/pmer/TsunagariC).
 ### Cloning
 
 ```bash
-git clone --recursive https://github.com/pmer/TsunagariC-Testing.git
+git clone https://github.com/pmer/TsunagariC-Testing.git
 cd TsunagariC-Testing
 ```
 
