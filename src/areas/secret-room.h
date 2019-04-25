@@ -1,6 +1,6 @@
 /*************************************
 ** Tsunagari Tile Engine            **
-** grove06.cpp                      **
+** secret-room.h                    **
 ** Copyright 2016-2019 Paul Merrill **
 *************************************/
 
@@ -24,16 +24,17 @@
 // IN THE SOFTWARE.
 // **********
 
-#include "areas/grove06.h"
+#ifndef SRC_AREAS_SECRET_ROOM_H_
+#define SRC_AREAS_SECRET_ROOM_H_
 
-Grove06::Grove06() noexcept {
-    clouds.setZ(10.0);
-}
+#include "data/data-area.h"
 
-void
-Grove06::onLoad() noexcept {
-    clouds.createRandomCloud(*this);
+class SecretRoom : public DataArea {
+ public:
+    SecretRoom() noexcept;
 
-    const int second = 1000;
-    clouds.createCloudsRegularly(*this, 20 * second, 30 * second);
-}
+    void bookSound() noexcept;
+    void ouchSound() noexcept;
+};
+
+#endif  // SRC_AREAS_SECRET_ROOM_H_

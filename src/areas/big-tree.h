@@ -1,8 +1,8 @@
-/********************************
-** Tsunagari Tile Engine       **
-** big-tree.h                  **
-** Copyright 2016 Paul Merrill **
-********************************/
+/*************************************
+** Tsunagari Tile Engine            **
+** big-tree.h                       **
+** Copyright 2016-2019 Paul Merrill **
+*************************************/
 
 // **********
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,16 +28,15 @@
 #define SRC_AREAS_BIG_TREE_H_
 
 #include "data/data-area.h"
-
 #include "world/clouds.h"
 
 class BigTreeArea : public DataArea {
     Clouds clouds;
 
  public:
-    BigTreeArea();
+    BigTreeArea() noexcept;
 
-    void onLoad();
+    void onLoad() noexcept;
 };
 
 #endif  // SRC_AREAS_BIG_TREE_H_

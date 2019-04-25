@@ -32,9 +32,9 @@
 
 class TestingDataWorld : public DataWorld {
  public:
-    TestingDataWorld();
+    TestingDataWorld() noexcept;
 
-    bool init();
+    bool init() noexcept;
 };
 
 #endif  // SRC_WORLD_WORLD_H_

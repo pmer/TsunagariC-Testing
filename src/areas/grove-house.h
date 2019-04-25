@@ -1,6 +1,6 @@
 /*************************************
 ** Tsunagari Tile Engine            **
-** grove06.cpp                      **
+** grove-house.h                    **
 ** Copyright 2016-2019 Paul Merrill **
 *************************************/
 
@@ -24,16 +24,21 @@
 // IN THE SOFTWARE.
 // **********
 
-#include "areas/grove06.h"
+#ifndef SRC_AREAS_GROVE_HOUSE_H_
+#define SRC_AREAS_GROVE_HOUSE_H_
 
-Grove06::Grove06() noexcept {
-    clouds.setZ(10.0);
-}
+#include "data/data-area.h"
 
-void
-Grove06::onLoad() noexcept {
-    clouds.createRandomCloud(*this);
+class GroveHouse : public DataArea {
+    bool openedDoor = false;
 
-    const int second = 1000;
-    clouds.createCloudsRegularly(*this, 20 * second, 30 * second);
-}
+ public:
+    GroveHouse() noexcept;
+
+	void GroveHouse::onOpenDoor(Entity&, Tile&) noexcept;
+    void GroveHouse::armorSound() noexcept;
+    void GroveHouse::bookSound() noexcept;
+    void GroveHouse::ouchSound() noexcept;
+};
+
+#endif  // SRC_AREAS_GROVE_HOUSE_H_

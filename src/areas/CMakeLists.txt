@@ -1,9 +1,0 @@
-set(TSUNAGARIC_TESTING_SOURCES ${TSUNAGARIC_TESTING_SOURCES}
-    ${CMAKE_CURRENT_LIST_DIR}/big-tree.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/cave01.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/grove01.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/grove04.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/grove06.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/grove-house.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/secret-room.cpp
-)

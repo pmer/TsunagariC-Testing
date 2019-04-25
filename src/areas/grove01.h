@@ -1,6 +1,6 @@
 /*************************************
 ** Tsunagari Tile Engine            **
-** grove06.cpp                      **
+** grove01.h                        **
 ** Copyright 2016-2019 Paul Merrill **
 *************************************/
 
@@ -24,16 +24,28 @@
 // IN THE SOFTWARE.
 // **********
 
-#include "areas/grove06.h"
+#ifndef SRC_AREAS_GROVE01_H_
+#define SRC_AREAS_GROVE01_H_
 
-Grove06::Grove06() noexcept {
-    clouds.setZ(10.0);
-}
+#include "data/data-area.h"
+#include "world/clouds.h"
 
-void
-Grove06::onLoad() noexcept {
-    clouds.createRandomCloud(*this);
+class Grove01 : public DataArea {
+    Clouds clouds;
 
-    const int second = 1000;
-    clouds.createCloudsRegularly(*this, 20 * second, 30 * second);
-}
+    bool drinking = false;
+
+    bool openedChest = false;
+    bool musicPaused = false;
+
+ public:
+    Grove01() noexcept;
+
+    void onLoad() noexcept;
+
+    void onWell(Entity&, Tile&) noexcept;
+    void onOpenChest(Entity&, Tile&) noexcept;
+    void toggleMusic() noexcept;
+};
+
+#endif  // SRC_AREAS_GROVE01_H_

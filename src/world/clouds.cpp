@@ -1,9 +1,9 @@
-/**********************************
-** Tsunagari Tile Engine         **
-** clouds.cpp                    **
-** Copyright 2014 PariahSoft LLC **
-** Copyright 2016 Paul Merrill   **
-**********************************/
+/***************************************
+** Tsunagari Tile Engine              **
+** clouds.cpp                         **
+** Copyright 2014      Michael Reiley **
+** Copyright 2014-2019 Paul Merrill   **
+***************************************/
 
 // **********
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,43 +27,38 @@
 
 #include "world/clouds.h"
 
-#include <math.h>
-
-#include <algorithm>
-#include <string>
-
 #include "core/area.h"
-#include "core/formatter.h"
 #include "util/random.h"
+#include "util/string.h"
 
-Clouds::Clouds()
-    : z(0.0) {
-}
+Clouds::Clouds() noexcept : z(0.0) {}
 
-void Clouds::setZ(double z) {
+void
+Clouds::setZ(double z) noexcept {
     this->z = z;
 }
 
-void Clouds::createRandomCloud(DataArea& dataArea) {
+void
+Clouds::createRandomCloud(DataArea& dataArea) noexcept {
     ivec3 areaDimensions = dataArea.area->getDimensions();
 
     // Random location in Area.
-    vicoord tilePosition(randInt(0, areaDimensions.x),
-                         randInt(0, areaDimensions.y),
-                         z);
+    vicoord tilePosition{
+            randInt(0, areaDimensions.x), randInt(0, areaDimensions.y), z};
 
     createCloudAt(dataArea, tilePosition);
 }
 
-void Clouds::createCloudsRegularly(DataArea& dataArea, int minMS, int maxMS) {
+void
+Clouds::createCloudsRegularly(DataArea& dataArea,
+                              int minMS,
+                              int maxMS) noexcept {
     int millis = randInt(minMS, maxMS);
-    dataArea.timerThen(millis, [this, &dataArea, minMS, maxMS] () {
+    dataArea.timerThen(millis, [this, &dataArea, minMS, maxMS]() {
         ivec3 areaDimensions = dataArea.area->getDimensions();
 
         // Right-hand-side of the Area.
-        vicoord position(areaDimensions.x + 1,
-                         randInt(0, areaDimensions.y),
-                         z);
+        vicoord position{areaDimensions.x + 1, randInt(0, areaDimensions.y), z};
 
         createCloudAt(dataArea, position);
 
@@ -72,18 +67,23 @@ void Clouds::createCloudsRegularly(DataArea& dataArea, int minMS, int maxMS) {
     });
 }
 
-void Clouds::createCloudAt(DataArea& dataArea, vicoord tilePosition) {
+void
+Clouds::createCloudAt(DataArea& dataArea, vicoord tilePosition) noexcept {
     const double secondsToMilliseconds = 1000.0;
     const int left = -1;
     // const int right = 1;
 
     ivec2 tileDimensions = dataArea.area->getTileDimensions();
 
-    rcoord pixelPosition(tilePosition.x * tileDimensions.x,
-                         tilePosition.y * tileDimensions.y,
-                         10.0);
+    rcoord pixelPosition{
+            static_cast<double>(static_cast<int64_t>(tilePosition.x) *
+                                static_cast<int64_t>(tileDimensions.x)),
+            static_cast<double>(static_cast<int64_t>(tilePosition.y) *
+                                static_cast<int64_t>(tileDimensions.y)),
+            10.0};
 
-    const double minimumAcceptableDistance = tileDimensions.x * 8;
+    const double minimumAcceptableDistance =
+            static_cast<double>(static_cast<int64_t>(tileDimensions.x) * 8);
 
     for (auto& other : clouds) {
         rcoord otherPosition = other->getPixelCoord();
@@ -93,28 +93,26 @@ void Clouds::createCloudAt(DataArea& dataArea, vicoord tilePosition) {
         }
     }
 
-    std::string type = Formatter("entities/clouds/cloud%.json") % randInt(1, 4);
+    String type = String("entities/clouds/cloud") << randInt(1, 4) << ".json";
     auto cloud = dataArea.area->spawnOverlay(type, tilePosition, "stance");
 
     clouds.push_back(cloud);
 
     ivec2 cloudSize = cloud->getImageSize();  // in pixels
-    int cloudWidthInTiles = static_cast<int>(
-            ceil(static_cast<double>(cloudSize.x) /
-                 static_cast<double>(tileDimensions.x)));
+    int cloudWidthInTiles =
+            static_cast<int>(ceil(static_cast<double>(cloudSize.x) /
+                                  static_cast<double>(tileDimensions.x)));
 
     // Drift just enough to get off screen.
     int tilesToDrift = left * (tilePosition.x + cloudWidthInTiles);
-    ivec2 drift(tilesToDrift * tileDimensions.x, 0);
+    ivec2 drift{tilesToDrift * tileDimensions.x, 0};
 
     int driftDuration = static_cast<int>(
             abs(drift.x) / cloud->getSpeedInPixels() * secondsToMilliseconds);
 
-    cloud->drift(ivec2(drift.x, 0));
-    dataArea.timerThen(driftDuration, [this, cloud] () {
+    cloud->drift(ivec2{drift.x, 0});
+    dataArea.timerThen(driftDuration, [this, cloud]() {
         cloud->destroy();
-
-        auto it = std::find(clouds.begin(), clouds.end(), cloud);
-        clouds.erase(it);
+        clouds.erase_unsorted(const_cast<Rc<Overlay>*>(&cloud));
     });
 }

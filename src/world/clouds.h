@@ -1,9 +1,9 @@
-/**********************************
-** Tsunagari Tile Engine         **
-** clouds.h                      **
-** Copyright 2014 PariahSoft LLC **
-** Copyright 2016 Paul Merrill   **
-**********************************/
+/***************************************
+** Tsunagari Tile Engine              **
+** clouds.h                           **
+** Copyright 2014      Michael Reiley **
+** Copyright 2014-2019 Paul Merrill   **
+***************************************/
 
 // **********
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -37,29 +37,31 @@
 //! Create clouds that drift left across an Area.
 class Clouds {
  public:
-    Clouds();
+    Clouds() noexcept;
 
     //! Set spawning z-height layer that clouds will appear on.
-    void setZ(double z);
+    void setZ(double z) noexcept;
 
     //! Create a cloud at a random position.  May do nothing if the cloud
     //! would have appeared to close to another cloud (which would be ugly).
-    void createRandomCloud(DataArea& dataArea);
+    void createRandomCloud(DataArea& dataArea) noexcept;
     //! Create a sequence of clouds over time that drift in from the
     //! right-hand-side.  One will attempt to appear every [minMS, maxMS]
     //! milliseconds.  May do nothing if the cloud would have appeared to
     //! close to another cloud (which would be ugly).
-    void createCloudsRegularly(DataArea& dataArea, int minMS, int maxMS);
+    void createCloudsRegularly(DataArea& dataArea,
+                               int minMS,
+                               int maxMS) noexcept;
 
  private:
     //! Create a cloud, move it left until out of area, then destroy it.
     //! If the cloud would be created next to another, already existing
     //! cloud, do nothing.
-    void createCloudAt(DataArea& dataArea, vicoord tilePosition);
+    void createCloudAt(DataArea& dataArea, vicoord tilePosition) noexcept;
 
     double z;
 
-    vector<Rc<Overlay>> clouds;
+    Vector<Rc<Overlay>> clouds;
 };
 
 #endif  // SRC_WORLD_CLOUDS_H_

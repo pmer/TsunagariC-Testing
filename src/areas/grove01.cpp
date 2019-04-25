@@ -1,8 +1,8 @@
-/********************************
-** Tsunagari Tile Engine       **
-** grove01.cpp                 **
-** Copyright 2016 Paul Merrill **
-********************************/
+/*************************************
+** Tsunagari Tile Engine            **
+** grove01.cpp                      **
+** Copyright 2016-2019 Paul Merrill **
+*************************************/
 
 // **********
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,114 +24,109 @@
 // IN THE SOFTWARE.
 // **********
 
-#include <math.h>
+#include "areas/grove01.h"
 
+#include "ai/ai-wander.h"
 #include "core/area.h"
 #include "core/log.h"
 #include "core/music.h"
 #include "core/npc.h"
-#include "data/data-area.h"
-
-#include "ai/ai-wander.h"
-#include "world/clouds.h"
 
 // Circular in-out ease
-static double ease(double x) {
-    return 0.5 * sin(M_PI * x - M_PI_2) + 0.5;
+static double
+ease(double x) noexcept {
+    return 0.5 * sin(M_PI * x - M_PI / 2) + 0.5;
 }
 
-class grove01 : public DataArea {
-    Clouds clouds;
+Grove01::Grove01() noexcept {
+    clouds.setZ(10.0);
 
-    bool drinking = false;
+    scripts["well"] = (TileScript)&Grove01::onWell;
+    scripts["open_chest"] = (TileScript)&Grove01::onOpenChest;
+}
 
-    bool openedChest = false;
-    bool musicPaused = false;
+void
+Grove01::onLoad() noexcept {
+    // Create a wandering wizard NPC.
+    auto wizard = area->spawnNPC(
+            "entities/wizard/wizard.json", vicoord{16, 22, 0.0}, "down");
+    wizard->attach(AIWanderTile(wizard.get(), 4, 1000));
 
- public:
-    grove01() {
-        clouds.setZ(10.0);
-
-        scripts["well"] = (TileScript)&grove01::onWell;
-        scripts["open_chest"] = (TileScript)&grove01::onOpenChest;
+    // And a few drifting cloud Overlays.
+    for (int i = 0; i < 5; i++) {
+        clouds.createRandomCloud(*this);
     }
 
-    void onLoad() {
-        // Create a wandering wizard NPC.
-        auto wizard = area->spawnNPC("entities/wizard/wizard.json",
-                                     vicoord(16, 22, 0.0), "down");
-        wizard->attach(AIWanderTile(wizard.get(), 4, 1000));
+    const int second = 1000;
+    clouds.createCloudsRegularly(*this, 10 * second, 20 * second);
+}
 
-        // And a few drifting cloud Overlays.
-        for (int i = 0; i < 5; i++) {
-            clouds.createRandomCloud(*this);
-        }
+void
+Grove01::onWell(Entity&, Tile&) noexcept {
+    const int maxAlpha = 192;
 
-        const int second = 1000;
-        clouds.createCloudsRegularly(*this, 10 * second, 20 * second);
+    if (drinking) {
+        return;
     }
 
-    void onWell(Entity&, Tile&) {
-        const int maxAlpha = 192;
+    drinking = true;
 
-        if (drinking) {
-            return;
-        }
+    playSoundEffect("sounds/splash.oga");
 
-        drinking = true;
-
-        playSoundEffect("sounds/splash.oga");
-
-        timerProgressAndThen(1000,
-            [this, maxAlpha] (double percent) {
+    timerProgressAndThen(
+            1000,
+            [this, maxAlpha](double percent) {
                 uint8_t alpha;
                 if (percent < 0.5) {
                     alpha = (uint8_t)(maxAlpha * ease(2 * percent));
-                } else {
+                }
+                else {
                     alpha = (uint8_t)(maxAlpha * ease(2 * (1 - percent)));
                 }
                 area->setColorOverlay(alpha, 255, 255, 255);
             },
-            [this, maxAlpha] () {
+            [this, maxAlpha]() {
                 area->setColorOverlay(0, 0, 0, 0);
                 drinking = false;
             });
+}
+
+void
+Grove01::onOpenChest(Entity&, Tile&) noexcept {
+    /* This function is called when the chest in grove01.json is
+     * activated by the player. The first time we are run, we open
+     * the chest.  Further invocations feature an easter egg where
+     * we toggle the game's music. :)
+     */
+
+    if (openedChest) {
+        toggleMusic();
+        return;
     }
 
-    void onOpenChest(Entity&, Tile&) {
-        /* This function is called when the chest in grove01.json is
-         * activated by the player. The first time we are run, we open
-         * the chest.  Further invocations feature an easter egg where
-         * we toggle the game's music. :)
-         */
+    openedChest = true;
+    auto tile = area->getTile(vicoord{5, 21, -0.1});   // closed chest
+    auto tile2 = area->getTile(vicoord{5, 20, -0.1});  // above the closed chest
+    auto objects = area->getTileSet("areas/tiles/objects.png");
 
-        if (openedChest) {
-            toggleMusic();
-            return;
-        }
+    // Change to open chest, bottom and top halves.
+    tile->setType(objects->at(1, 6));
+    tile2->setType(objects->at(1, 5));
+    area->requestRedraw();
 
-        openedChest = true;
-        auto tile = area->getTile(vicoord(5, 21, -0.1));   // closed chest
-        auto tile2 = area->getTile(vicoord(5, 20, -0.1));  // above the closed chest
-        auto objects = area->getTileSet("areas/tiles/objects.png");
+    playSoundEffect("sounds/door.oga");
+}
 
-        // Change to open chest, bottom and top halves.
-        tile->setType(objects->at(1, 6));
-        tile2->setType(objects->at(1, 5));
-        area->requestRedraw();
-
-        playSoundEffect("sounds/door.oga");
+void
+Grove01::toggleMusic() noexcept {
+    Music& music = Music::instance();
+    if (musicPaused) {
+        music.resume();
+        Log::info("grove01", "Unpausing music!");
     }
-
-    void toggleMusic() {
-        Music& music = Music::instance();
-        if (musicPaused) {
-            music.resume();
-            Log::info("grove01", "Unpausing music!");
-        } else {
-            music.pause();
-            Log::info("grove01", "Pausing music!");
-        }
-        musicPaused = !musicPaused;
+    else {
+        music.pause();
+        Log::info("grove01", "Pausing music!");
     }
-};
+    musicPaused = !musicPaused;
+}

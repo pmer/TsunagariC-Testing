@@ -1,9 +1,9 @@
-/**********************************
-** Tsunagari Tile Engine         **
-** ai-wander.h                   **
-** Copyright 2014 PariahSoft LLC **
-** Copyright 2016 Paul Merrill   **
-**********************************/
+/***************************************
+** Tsunagari Tile Engine              **
+** ai-wander.h                        **
+** Copyright 2014      Michael Reiley **
+** Copyright 2014-2019 Paul Merrill   **
+***************************************/
 
 // **********
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,23 +31,20 @@
 // The wander AI moves characters around in a Pokemon-style fashion.  Every
 // once in a while they will move in a random direction by one tile.
 
-#include <time.h>
-
-#include <functional>
-
-#include "util/move.h"
+#include "util/function.h"
+#include "util/int.h"
 
 class Character;
 
 //! Returns a function that, given `time_t dt`, will try to move the character
 //! one tile every `tryEvery` milliseconds.  There is a 1-in-`chance` chance
 //! that the character will move during a try.
-std::function<void(time_t)>
-AIWanderTile(Character* c, int chance, time_t tryEvery);
+Function<void(time_t)> AIWanderTile(Character* c,
+                                    int chance,
+                                    time_t tryEvery) noexcept;
 
 //! Returns a function that will try to move the character one tile every turn.
 //! There is a 1-in-`chance` chance that the character will move during a try.
-std::function<void()>
-AIWanderTurn(Character* c, int chance);
+Function<void()> AIWanderTurn(Character* c, int chance) noexcept;
 
 #endif  // SRC_AI_AI_WANDER_H_

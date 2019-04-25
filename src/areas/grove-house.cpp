@@ -1,8 +1,8 @@
-/********************************
-** Tsunagari Tile Engine       **
-** grove_house.cpp             **
-** Copyright 2016 Paul Merrill **
-********************************/
+/*************************************
+** Tsunagari Tile Engine            **
+** grove-house.cpp                  **
+** Copyright 2016-2019 Paul Merrill **
+*************************************/
 
 // **********
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,59 +24,59 @@
 // IN THE SOFTWARE.
 // **********
 
+#include "areas/grove-house.h"
+
 #include "core/area.h"
 #include "core/log.h"
 #include "core/tile.h"
-#include "data/data-area.h"
 
-class grove_house : public DataArea {
-    bool openedDoor = false;
+GroveHouse::GroveHouse() noexcept {
+    scripts["open_door"] = (TileScript)&GroveHouse::onOpenDoor;
+    scripts["sound_armor"] = (TileScript)&GroveHouse::armorSound;
+    scripts["sound_book"] = (TileScript)&GroveHouse::bookSound;
+    scripts["sound_ouch"] = (TileScript)&GroveHouse::ouchSound;
+}
 
- public:
-    grove_house() {
-        scripts["open_door"] = (TileScript)&grove_house::onOpenDoor;
-        scripts["sound_armor"] = (TileScript)&grove_house::armorSound;
-        scripts["sound_book"] = (TileScript)&grove_house::bookSound;
-        scripts["sound_ouch"] = (TileScript)&grove_house::ouchSound;
+void
+GroveHouse::onOpenDoor(Entity&, Tile&) noexcept {
+    if (openedDoor) {
+        Log::err("grove_house", "onOpenDoor called again");
+        return;
     }
+    openedDoor = true;
 
-    void onOpenDoor(Entity&, Tile&) {
-        if (openedDoor) {
-            Log::err("grove_house", "onOpenDoor called again");
-            return;
-        }
-        openedDoor = true;
+    // torch which activated this trigger should make "ouch" now
+    auto torch_prop = area->getTile(vicoord{6, 0, 0.0});
+    torch_prop->useScript = scripts["sound_ouch"];
 
-        // torch which activated this trigger should make "ouch" now
-        auto torch_prop = area->getTile(vicoord(6, 0, 0.0));
-        torch_prop->useScript = scripts["sound_ouch"];
+    // closed exit on north wall, property layer
+    auto door_prop = area->getTile(vicoord{4, 0, 0.0});
+    door_prop->exits[EXIT_NORMAL] = Exit("areas/secret_room.json", 4, 5, 0.0);
+    door_prop->flagManip().setNowalk(false);
 
-        // closed exit on north wall, property layer
-        auto door_prop = area->getTile(vicoord(4, 0, 0.0));
-        door_prop->exits[EXIT_NORMAL] = Exit("areas/secret_room.json", 4, 5, 0.0);
-        door_prop->flagManip().setNowalk(false);
+    auto tileSet = area->getTileSet("areas/tiles/indoors.png");
 
-        auto tileSet = area->getTileSet("areas/tiles/indoors.png");
+    // closed exit on north wall, graphics layer
+    auto door_graph = area->getTile(vicoord{4, 0, -0.2});
+    // change to open exit
+    door_graph->setType(tileSet->at(2, 9));
 
-        // closed exit on north wall, graphics layer
-        auto door_graph = area->getTile(vicoord(4, 0, -0.2));
-        // change to open exit
-        door_graph->setType(tileSet->at(2, 9));
+    area->requestRedraw();
 
-        area->requestRedraw();
+    playSoundEffect("sounds/door.oga");
+}
 
-        playSoundEffect("sounds/door.oga");
-    }
+void
+GroveHouse::armorSound() noexcept {
+    playSoundEffect("sounds/metal_clank.oga");
+}
 
-    void armorSound() {
-        playSoundEffect("sounds/metal_clank.oga");
-    }
+void
+GroveHouse::bookSound() noexcept {
+    playSoundEffect("sounds/book.oga");
+}
 
-    void bookSound() {
-        playSoundEffect("sounds/book.oga");
-    }
-
-    void ouchSound() {
-        playSoundEffect("sounds/ouch.oga");
-    }
-};
+void
+GroveHouse::ouchSound() noexcept {
+    playSoundEffect("sounds/ouch.oga");
+}

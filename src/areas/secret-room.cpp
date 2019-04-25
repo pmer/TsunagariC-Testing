@@ -1,8 +1,8 @@
-/********************************
-** Tsunagari Tile Engine       **
-** secret_room.cpp             **
-** Copyright 2016 Paul Merrill **
-********************************/
+/*************************************
+** Tsunagari Tile Engine            **
+** secret-room.cpp                  **
+** Copyright 2016-2019 Paul Merrill **
+*************************************/
 
 // **********
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,20 +24,19 @@
 // IN THE SOFTWARE.
 // **********
 
-#include "data/data-area.h"
+#include "areas/secret-room.h"
 
-class secret_room : public DataArea {
- public:
-    secret_room() {
-        scripts["sound_book"] = (TileScript)&secret_room::bookSound;
-        scripts["sound_ouch"] = (TileScript)&secret_room::ouchSound;
-    }
+SecretRoom::SecretRoom() noexcept {
+    scripts["sound_book"] = (TileScript)&SecretRoom::bookSound;
+    scripts["sound_ouch"] = (TileScript)&SecretRoom::ouchSound;
+}
 
-    void bookSound() {
-        playSoundEffect("sounds/book.oga");
-    }
+void
+SecretRoom::bookSound() noexcept {
+    playSoundEffect("sounds/book.oga");
+}
 
-    void ouchSound() {
-        playSoundEffect("sounds/ouch.oga");
-    }
-};
+void
+SecretRoom::ouchSound() noexcept {
+    playSoundEffect("sounds/ouch.oga");
+}

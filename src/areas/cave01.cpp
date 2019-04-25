@@ -1,8 +1,8 @@
-/********************************
-** Tsunagari Tile Engine       **
-** cave01.cpp                  **
-** Copyright 2016 Paul Merrill **
-********************************/
+/*************************************
+** Tsunagari Tile Engine            **
+** cave01.cpp                       **
+** Copyright 2016-2019 Paul Merrill **
+*************************************/
 
 // **********
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,10 +24,10 @@
 // IN THE SOFTWARE.
 // **********
 
+#include "areas/cave01.h"
+
 #include "core/area.h"
 #include "core/player.h"
-#include "data/data-area.h"
-
 
 /*
 #include <future>
@@ -69,43 +69,43 @@ class TimelineExec {
 };
 */
 
-class cave01 : public DataArea {
- public:
-    cave01() {
-        scripts["sound_ouch"] = (TileScript)&cave01::ouchSound;
-    }
+Cave01::Cave01() noexcept {
+    scripts["sound_ouch"] = (TileScript)&Cave01::ouchSound;
+}
 
-    void onLoad() {
-        /*
-        run(Timeline{
-            {    0, new SetPlayerFreeze(true) },
-            {    0, new SetPlayerPhase("up") },
-            {    0, new FadeOut({0, 0, 0}, 0) },
-            {    0, new PlaySound("sounds/rockfall.oga") },
-            { 5000, new FadeIn(3000) },
-            { 8000, new SetPlayerFreeze(false) }
-        });
-        */
+void
+Cave01::onLoad() noexcept {
+    /*
+    run(Timeline{
+        {    0, new SetPlayerFreeze(true) },
+        {    0, new SetPlayerPhase("up") },
+        {    0, new FadeOut({0, 0, 0}, 0) },
+        {    0, new PlaySound("sounds/rockfall.oga") },
+        { 5000, new FadeIn(3000) },
+        { 8000, new SetPlayerFreeze(false) }
+    });
+    */
 
-        Player& player = Player::instance();
-        player.setFrozen(true);
-        player.setPhase("up");
-        area->setColorOverlay(255, 0, 0, 0);
+    Player& player = Player::instance();
+    player.setFrozen(true);
+    player.setPhase("up");
+    area->setColorOverlay(255, 0, 0, 0);
 
-        playSoundAndThen("sounds/rockfall.oga", [this] () {
-            timerProgressAndThen(3000,
-                [this] (double percent) {
+    playSoundAndThen("sounds/rockfall.oga", [this]() {
+        timerProgressAndThen(
+                3000,
+                [this](double percent) {
                     uint8_t alpha = static_cast<uint8_t>(255 - percent * 255);
                     area->setColorOverlay(alpha, 0, 0, 0);
                 },
-                [this] () {
+                [this]() {
                     area->setColorOverlay(0, 0, 0, 0);
                     Player::instance().setFrozen(false);
                 });
-        });
-    }
+    });
+}
 
-    void ouchSound(Entity&, Tile&) {
-        playSoundEffect("sounds/ouch.oga");
-    }
-};
+void
+Cave01::ouchSound(Entity&, Tile&) noexcept {
+    playSoundEffect("sounds/ouch.oga");
+}

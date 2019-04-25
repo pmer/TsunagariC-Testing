@@ -2,7 +2,7 @@
 ** Tsunagari Tile Engine              **
 ** world.cpp                          **
 ** Copyright 2014      Michael Reiley **
-** Copyright 2014-2017 Paul Merrill   **
+** Copyright 2014-2019 Paul Merrill   **
 ***************************************/
 
 // **********
@@ -27,24 +27,23 @@
 
 #include "world/world.h"
 
+#include "areas/big-tree.h"
+#include "areas/cave01.h"
+#include "areas/grove-house.h"
+#include "areas/grove01.h"
+#include "areas/grove04.h"
+#include "areas/grove06.h"
+#include "areas/secret-room.h"
 #include "core/log.h"
 
-#include "areas/big-tree.h"
-#include "areas/cave01.cpp"
-#include "areas/grove-house.cpp"
-#include "areas/grove01.cpp"
-#include "areas/grove04.cpp"
-#include "areas/grove06.cpp"
-#include "areas/secret-room.cpp"
-
-
-DataWorld& DataWorld::instance() {
+DataWorld&
+DataWorld::instance() noexcept {
     static auto globalTestingDataWorld = new TestingDataWorld;
     return *globalTestingDataWorld;
 }
 
 
-TestingDataWorld::TestingDataWorld() {
+TestingDataWorld::TestingDataWorld() noexcept {
     Log::info("TestingDataWorld", "Hello!");
 
     about.name = "Testing World";
@@ -53,7 +52,7 @@ TestingDataWorld::TestingDataWorld() {
 
     parameters.moveMode = TILE;
 
-    parameters.viewportResolution = { 240, 160 };
+    parameters.viewportResolution = {240, 160};
 
     parameters.input.persistDelay.initial = 300;
     parameters.input.persistDelay.consecutive = 100;
@@ -62,20 +61,21 @@ TestingDataWorld::TestingDataWorld() {
     parameters.gameStart.player.phase = "down";
 
     parameters.gameStart.area = "areas/grove01.json";
-    parameters.gameStart.coords = { 15, 22, 0 };
+    parameters.gameStart.coords = {15, 22, 0};
 
     datafile = "./testing.world";
 
-    areas["areas/cave01.json"] = new cave01;
+    areas["areas/cave01.json"] = new Cave01;
     areas["areas/bigtree.json"] = new BigTreeArea;
-    areas["areas/grove_house.json"] = new grove_house;
-    areas["areas/grove01.json"] = new grove01;
-    areas["areas/grove04.json"] = new grove04;
-    areas["areas/grove06.json"] = new grove06;
-    areas["areas/secret_room.json"] = new secret_room;
+    areas["areas/grove_house.json"] = new GroveHouse;
+    areas["areas/grove01.json"] = new Grove01;
+    areas["areas/grove04.json"] = new Grove04;
+    areas["areas/grove06.json"] = new Grove06;
+    areas["areas/secret_room.json"] = new SecretRoom;
 }
 
-bool TestingDataWorld::init() {
+bool
+TestingDataWorld::init() noexcept {
     Log::info("TestingDataWorld", "Ready to go");
     return true;
 }

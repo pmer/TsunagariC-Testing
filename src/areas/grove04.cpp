@@ -1,8 +1,8 @@
-/********************************
-** Tsunagari Tile Engine       **
-** grove04.cpp                 **
-** Copyright 2016 Paul Merrill **
-********************************/
+/*************************************
+** Tsunagari Tile Engine            **
+** grove04.cpp                      **
+** Copyright 2016-2019 Paul Merrill **
+*************************************/
 
 // **********
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,22 +24,16 @@
 // IN THE SOFTWARE.
 // **********
 
-#include "data/data-area.h"
+#include "areas/grove04.h"
 
-#include "world/clouds.h"
+Grove04::Grove04() noexcept {
+    clouds.setZ(10.0);
+}
 
-class grove04 : public DataArea {
-    Clouds clouds;
+void
+Grove04::onLoad() noexcept {
+    clouds.createRandomCloud(*this);
 
- public:
-    grove04() {
-        clouds.setZ(10.0);
-    }
-
-    void onLoad() {
-        clouds.createRandomCloud(*this);
-
-        const int second = 1000;
-        clouds.createCloudsRegularly(*this, 20 * second, 30 * second);
-    }
-};
+    const int second = 1000;
+    clouds.createCloudsRegularly(*this, 20 * second, 30 * second);
+}

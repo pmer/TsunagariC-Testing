@@ -1,8 +1,8 @@
-/********************************
-** Tsunagari Tile Engine       **
-** big-tree.cpp                **
-** Copyright 2016 Paul Merrill **
-********************************/
+/*************************************
+** Tsunagari Tile Engine            **
+** big-tree.cpp                     **
+** Copyright 2016-2019 Paul Merrill **
+*************************************/
 
 // **********
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,11 +26,12 @@
 
 #include "areas/big-tree.h"
 
-BigTreeArea::BigTreeArea() {
+BigTreeArea::BigTreeArea() noexcept {
     clouds.setZ(10.0);
 }
 
-void BigTreeArea::onLoad() {
+void
+BigTreeArea::onLoad() noexcept {
     clouds.createRandomCloud(*this);
 
     const int second = 1000;
