@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.13)
-project(TsunagariTestingWorld)
+project(TsunagariTestingWorld
+    DESCRIPTION "Sample world for TsunagariC"
+    HOMEPAGE_URL "https://github.com/pmer/TsunagariC-Testing"
+    LANGUAGES CXX
+)
 
 add_subdirectory(TsunagariC)
 
