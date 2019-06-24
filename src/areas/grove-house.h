@@ -35,10 +35,10 @@ class GroveHouse : public DataArea {
  public:
     GroveHouse() noexcept;
 
-	void GroveHouse::onOpenDoor(Entity&, Tile&) noexcept;
-    void GroveHouse::armorSound() noexcept;
-    void GroveHouse::bookSound() noexcept;
-    void GroveHouse::ouchSound() noexcept;
+    void onOpenDoor(Entity&, Tile&) noexcept;
+    void armorSound() noexcept;
+    void bookSound() noexcept;
+    void ouchSound() noexcept;
 };
 
 #endif  // SRC_AREAS_GROVE_HOUSE_H_
