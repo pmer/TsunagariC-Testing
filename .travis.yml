@@ -1,21 +1,18 @@
 language: cpp
 
-matrix:
-  include:
-    - os: osx
-      osx_image: xcode9.2
-      compiler: clang
-    - os: osx
-      osx_image: xcode9.2
-      compiler: gcc
+os: osx
+osx_image: xcode10.2
 
-before_install:
-  - brew install libgosu sdl2_image sdl2_mixer
+addons:
+  homebrew:
+    packages:
+      - cmake
+      - libgosu
+      - sdl2_image
+      - sdl2_mixer
 
-install:
+script:
   - mkdir build
   - cd build
   - cmake ..
-  - make
-
-script: true
+  - cmake --build .
