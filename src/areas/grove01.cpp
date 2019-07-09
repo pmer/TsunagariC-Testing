@@ -110,8 +110,8 @@ Grove01::onOpenChest(Entity&, Tile&) noexcept {
     auto objects = area->getTileSet("areas/tiles/objects.png");
 
     // Change to open chest, bottom and top halves.
-    tile->setType(objects->at(1, 6));
-    tile2->setType(objects->at(1, 5));
+    tile->type = objects->at(1, 6);
+    tile2->type = objects->at(1, 5);
     area->requestRedraw();
 
     playSoundEffect("sounds/door.oga");

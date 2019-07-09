@@ -82,7 +82,7 @@ AIWanderTile(Character* c, int chance, time_t tryEvery) noexcept {
     return [c, chance, cooldown](time_t dt) mutable {
         cooldown.advance(dt);
         if (cooldown.hasExpired()) {
-            cooldown.wrap();
+            cooldown.wrapAll();
             maybeMove(c, chance);
         }
     };

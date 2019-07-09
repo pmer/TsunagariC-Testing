@@ -94,7 +94,8 @@ Clouds::createCloudAt(DataArea& dataArea, vicoord tilePosition) noexcept {
     }
 
     String type = String("entities/clouds/cloud") << randInt(1, 4) << ".json";
-    auto cloud = dataArea.area->spawnOverlay(type, tilePosition, "stance");
+    Rc<Overlay> cloud =
+            dataArea.area->spawnOverlay(type, tilePosition, "stance");
 
     clouds.push_back(cloud);
 
@@ -107,12 +108,19 @@ Clouds::createCloudAt(DataArea& dataArea, vicoord tilePosition) noexcept {
     int tilesToDrift = left * (tilePosition.x + cloudWidthInTiles);
     ivec2 drift{tilesToDrift * tileDimensions.x, 0};
 
-    int driftDuration = static_cast<int>(
-            abs(drift.x) / cloud->getSpeedInPixels() * secondsToMilliseconds);
+    int driftDuration =
+            static_cast<int>((drift.x < 0 ? -drift.x : drift.x) /
+                             cloud->getSpeedInPixels() * secondsToMilliseconds);
 
     cloud->drift(ivec2{drift.x, 0});
     dataArea.timerThen(driftDuration, [this, cloud]() {
         cloud->destroy();
-        clouds.erase_unsorted(const_cast<Rc<Overlay>*>(&cloud));
+
+        for (auto it = clouds.begin(); it != clouds.end(); it++) {
+            if (*it == cloud) {
+                clouds.erase_unsorted(it);
+                break;
+            }
+        }
     });
 }

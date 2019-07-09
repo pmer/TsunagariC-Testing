@@ -29,6 +29,7 @@
 #include "core/area.h"
 #include "core/log.h"
 #include "core/tile.h"
+#include "util/assert.h"
 
 GroveHouse::GroveHouse() noexcept {
     scripts["open_door"] = (TileScript)&GroveHouse::onOpenDoor;
@@ -55,11 +56,12 @@ GroveHouse::onOpenDoor(Entity&, Tile&) noexcept {
     door_prop->flagManip().setNowalk(false);
 
     auto tileSet = area->getTileSet("areas/tiles/indoors.png");
+    assert_(tileSet);
 
     // closed exit on north wall, graphics layer
     auto door_graph = area->getTile(vicoord{4, 0, -0.2});
     // change to open exit
-    door_graph->setType(tileSet->at(2, 9));
+    door_graph->type = tileSet->at(2, 9);
 
     area->requestRedraw();
 
