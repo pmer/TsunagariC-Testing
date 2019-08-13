@@ -47,21 +47,21 @@ GroveHouse::onOpenDoor(Entity&, Tile&) noexcept {
     openedDoor = true;
 
     // torch which activated this trigger should make "ouch" now
-    auto torch_prop = area->getTile(vicoord{6, 0, 0.0});
+    auto torch_prop = area->grid.getTile(vicoord{6, 0, 0.0});
     torch_prop->useScript = scripts["sound_ouch"];
 
     // closed exit on north wall, property layer
-    auto door_prop = area->getTile(vicoord{4, 0, 0.0});
-    door_prop->exits[EXIT_NORMAL] = Exit("areas/secret_room.json", 4, 5, 0.0);
-    door_prop->flagManip().setNowalk(false);
+    auto door_prop = area->grid.getTile(vicoord{4, 0, 0.0});
+    door_prop->exits[EXIT_NORMAL] = Exit{"areas/secret_room.json", 4, 5, 0.0};
+    door_prop->flags &= ~TILE_NOWALK;
 
     auto tileSet = area->getTileSet("areas/tiles/indoors.png");
     assert_(tileSet);
 
     // closed exit on north wall, graphics layer
-    auto door_graph = area->getTile(vicoord{4, 0, -0.2});
     // change to open exit
-    door_graph->type = tileSet->at(2, 9);
+    area->grid.setTileType(area->grid.virt2phys(vicoord{4, 0, -0.2}),
+                           tileSet->at(2, 9));
 
     area->requestRedraw();
 

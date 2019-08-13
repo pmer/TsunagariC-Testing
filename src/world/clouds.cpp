@@ -40,7 +40,7 @@ Clouds::setZ(double z) noexcept {
 
 void
 Clouds::createRandomCloud(DataArea& dataArea) noexcept {
-    ivec3 areaDimensions = dataArea.area->getDimensions();
+    ivec3 areaDimensions = dataArea.area->grid.dim;
 
     // Random location in Area.
     vicoord tilePosition{
@@ -55,7 +55,7 @@ Clouds::createCloudsRegularly(DataArea& dataArea,
                               int maxMS) noexcept {
     int millis = randInt(minMS, maxMS);
     dataArea.timerThen(millis, [this, &dataArea, minMS, maxMS]() {
-        ivec3 areaDimensions = dataArea.area->getDimensions();
+        ivec3 areaDimensions = dataArea.area->grid.dim;
 
         // Right-hand-side of the Area.
         vicoord position{areaDimensions.x + 1, randInt(0, areaDimensions.y), z};
@@ -73,7 +73,7 @@ Clouds::createCloudAt(DataArea& dataArea, vicoord tilePosition) noexcept {
     const int left = -1;
     // const int right = 1;
 
-    ivec2 tileDimensions = dataArea.area->getTileDimensions();
+    ivec2 tileDimensions = dataArea.area->grid.tileDim;
 
     rcoord pixelPosition{
             static_cast<double>(static_cast<int64_t>(tilePosition.x) *
