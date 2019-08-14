@@ -34,7 +34,7 @@
 Clouds::Clouds() noexcept : z(0.0) {}
 
 void
-Clouds::setZ(double z) noexcept {
+Clouds::setZ(float z) noexcept {
     this->z = z;
 }
 
@@ -69,25 +69,25 @@ Clouds::createCloudsRegularly(DataArea& dataArea,
 
 void
 Clouds::createCloudAt(DataArea& dataArea, vicoord tilePosition) noexcept {
-    const double secondsToMilliseconds = 1000.0;
+    const float secondsToMilliseconds = 1000.0;
     const int left = -1;
     // const int right = 1;
 
     ivec2 tileDimensions = dataArea.area->grid.tileDim;
 
     rcoord pixelPosition{
-            static_cast<double>(static_cast<int64_t>(tilePosition.x) *
-                                static_cast<int64_t>(tileDimensions.x)),
-            static_cast<double>(static_cast<int64_t>(tilePosition.y) *
-                                static_cast<int64_t>(tileDimensions.y)),
+            static_cast<float>(static_cast<int64_t>(tilePosition.x) *
+                               static_cast<int64_t>(tileDimensions.x)),
+            static_cast<float>(static_cast<int64_t>(tilePosition.y) *
+                               static_cast<int64_t>(tileDimensions.y)),
             10.0};
 
-    const double minimumAcceptableDistance =
-            static_cast<double>(static_cast<int64_t>(tileDimensions.x) * 8);
+    const float minimumAcceptableDistance =
+            static_cast<float>(static_cast<int64_t>(tileDimensions.x) * 8);
 
     for (auto& other : clouds) {
         rcoord otherPosition = other->getPixelCoord();
-        double dist = pixelPosition.distanceTo(otherPosition);
+        float dist = pixelPosition.distanceTo(otherPosition);
         if (dist < minimumAcceptableDistance) {
             return;
         }
@@ -101,8 +101,8 @@ Clouds::createCloudAt(DataArea& dataArea, vicoord tilePosition) noexcept {
 
     ivec2 cloudSize = cloud->getImageSize();  // in pixels
     int cloudWidthInTiles =
-            static_cast<int>(ceil(static_cast<double>(cloudSize.x) /
-                                  static_cast<double>(tileDimensions.x)));
+            static_cast<int>(ceil(static_cast<float>(cloudSize.x) /
+                                  static_cast<float>(tileDimensions.x)));
 
     // Drift just enough to get off screen.
     int tilesToDrift = left * (tilePosition.x + cloudWidthInTiles);

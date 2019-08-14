@@ -40,7 +40,7 @@ class Clouds {
     Clouds() noexcept;
 
     //! Set spawning z-height layer that clouds will appear on.
-    void setZ(double z) noexcept;
+    void setZ(float z) noexcept;
 
     //! Create a cloud at a random position.  May do nothing if the cloud
     //! would have appeared to close to another cloud (which would be ugly).
@@ -59,7 +59,7 @@ class Clouds {
     //! cloud, do nothing.
     void createCloudAt(DataArea& dataArea, vicoord tilePosition) noexcept;
 
-    double z;
+    float z;
 
     Vector<Rc<Overlay>> clouds;
 };
