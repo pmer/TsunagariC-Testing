@@ -109,10 +109,8 @@ Grove01::onOpenChest(Entity&, Tile&) noexcept {
     auto objects = area->getTileSet("areas/tiles/objects.png");
 
     // Change to closed chest to open chest. Bottom and top halves.
-    area->grid.setTileType(area->grid.virt2phys(vicoord{5, 20, -0.1}),
-                           objects->at(1, 5));
-    area->grid.setTileType(area->grid.virt2phys(vicoord{5, 21, -0.1}),
-                           objects->at(1, 6));
+    area->grid.setTileType(vicoord{5, 20, -0.1}, objects->at(1, 5));
+    area->grid.setTileType(vicoord{5, 21, -0.1}, objects->at(1, 6));
     area->requestRedraw();
 
     playSoundEffect("sounds/door.oga");

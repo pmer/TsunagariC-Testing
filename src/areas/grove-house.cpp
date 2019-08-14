@@ -60,8 +60,7 @@ GroveHouse::onOpenDoor(Entity&, Tile&) noexcept {
 
     // closed exit on north wall, graphics layer
     // change to open exit
-    area->grid.setTileType(area->grid.virt2phys(vicoord{4, 0, -0.2}),
-                           tileSet->at(2, 9));
+    area->grid.setTileType(vicoord{4, 0, -0.2}, tileSet->at(2, 9));
 
     area->requestRedraw();
 
