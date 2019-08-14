@@ -120,13 +120,12 @@ Grove01::onOpenChest(Entity&, Tile&) noexcept {
 
 void
 Grove01::toggleMusic() noexcept {
-    Music& music = Music::instance();
     if (musicPaused) {
-        music.resume();
+        Music::resume();
         Log::info("grove01", "Unpausing music!");
     }
     else {
-        music.pause();
+        Music::pause();
         Log::info("grove01", "Pausing music!");
     }
     musicPaused = !musicPaused;

@@ -76,7 +76,7 @@ maybeMove(Character* c, int chance) noexcept {
 
 Function<void(time_t)>
 AIWanderTile(Character* c, int chance, time_t tryEvery) noexcept {
-    assert_(conf.moveMode == TILE);
+    assert_(Conf::moveMode == Conf::MovementMode::TILE);
 
     Cooldown cooldown(tryEvery);
     return [c, chance, cooldown](time_t dt) mutable {
@@ -90,7 +90,7 @@ AIWanderTile(Character* c, int chance, time_t tryEvery) noexcept {
 
 Function<void()>
 AIWanderTurn(Character* c, int chance) noexcept {
-    assert_(conf.moveMode == TURN);
+    assert_(Conf::moveMode == Conf::MovementMode::TURN);
 
     return [c, chance]() mutable { maybeMove(c, chance); };
 }

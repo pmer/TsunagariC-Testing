@@ -50,7 +50,7 @@ TestingDataWorld::TestingDataWorld() noexcept {
     about.author = "Michael Reiley and Paul Merrill";
     about.version = "1";
 
-    parameters.moveMode = TILE;
+    parameters.moveMode = Conf::MovementMode::TILE;
 
     parameters.viewportResolution = {240, 160};
 
