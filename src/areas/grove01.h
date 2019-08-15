@@ -43,8 +43,8 @@ class Grove01 : public DataArea {
 
     void onLoad() noexcept;
 
-    void onWell(Entity&, Tile&) noexcept;
-    void onOpenChest(Entity&, Tile&) noexcept;
+    void onWell(Entity&) noexcept;
+    void onOpenChest(Entity&) noexcept;
     void toggleMusic() noexcept;
 };
 

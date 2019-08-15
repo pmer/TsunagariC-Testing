@@ -35,7 +35,7 @@ class Cave01 : public DataArea {
 
     void onLoad() noexcept;
 
-	void ouchSound(Entity&, Tile&) noexcept;
+	void ouchSound(Entity&) noexcept;
 };
 
 #endif  // SRC_AREAS_CAVE01_H_

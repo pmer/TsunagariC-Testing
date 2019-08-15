@@ -108,6 +108,6 @@ Cave01::onLoad() noexcept {
 }
 
 void
-Cave01::ouchSound(Entity&, Tile&) noexcept {
+Cave01::ouchSound(Entity&) noexcept {
     playSoundEffect("sounds/ouch.oga");
 }

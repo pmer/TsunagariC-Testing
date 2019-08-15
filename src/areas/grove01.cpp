@@ -63,7 +63,7 @@ Grove01::onLoad() noexcept {
 }
 
 void
-Grove01::onWell(Entity&, Tile&) noexcept {
+Grove01::onWell(Entity&) noexcept {
     const int maxAlpha = 192;
 
     if (drinking) {
@@ -93,7 +93,7 @@ Grove01::onWell(Entity&, Tile&) noexcept {
 }
 
 void
-Grove01::onOpenChest(Entity&, Tile&) noexcept {
+Grove01::onOpenChest(Entity&) noexcept {
     /* This function is called when the chest in grove01.json is
      * activated by the player. The first time we are run, we open
      * the chest.  Further invocations feature an easter egg where

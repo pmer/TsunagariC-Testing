@@ -35,7 +35,7 @@ class GroveHouse : public DataArea {
  public:
     GroveHouse() noexcept;
 
-    void onOpenDoor(Entity&, Tile&) noexcept;
+    void onOpenDoor(Entity&) noexcept;
     void armorSound() noexcept;
     void bookSound() noexcept;
     void ouchSound() noexcept;

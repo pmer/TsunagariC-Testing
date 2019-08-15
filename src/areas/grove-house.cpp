@@ -39,7 +39,7 @@ GroveHouse::GroveHouse() noexcept {
 }
 
 void
-GroveHouse::onOpenDoor(Entity&, Tile&) noexcept {
+GroveHouse::onOpenDoor(Entity&) noexcept {
     if (openedDoor) {
         Log::err("grove_house", "onOpenDoor called again");
         return;
@@ -53,7 +53,6 @@ GroveHouse::onOpenDoor(Entity&, Tile&) noexcept {
 
     // closed exit on north wall, property layer
     auto door = area->grid.virt2phys(vicoord{4, 0, 0.0});
-    auto door_prop = area->grid.getTile(door);
     area->grid.exits[EXIT_NORMAL][door] =
         Exit{"areas/secret_room.json", 4, 5, 0.0};
     area->grid.flags[door] &= ~TILE_NOWALK;
