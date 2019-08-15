@@ -27,8 +27,8 @@
 #include "areas/secret-room.h"
 
 SecretRoom::SecretRoom() noexcept {
-    scripts["sound_book"] = (TileScript)&SecretRoom::bookSound;
-    scripts["sound_ouch"] = (TileScript)&SecretRoom::ouchSound;
+    scripts[StringView("sound_book")] = (TileScript)&SecretRoom::bookSound;
+    scripts[StringView("sound_ouch")] = (TileScript)&SecretRoom::ouchSound;
 }
 
 void

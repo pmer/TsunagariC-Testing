@@ -31,6 +31,7 @@
 #include "core/log.h"
 #include "core/music.h"
 #include "core/npc.h"
+#include "data/inprogress-timer.h"
 
 // Circular in-out ease
 static double
@@ -41,8 +42,8 @@ ease(double x) noexcept {
 Grove01::Grove01() noexcept {
     clouds.setZ(10.0);
 
-    scripts["well"] = (TileScript)&Grove01::onWell;
-    scripts["open_chest"] = (TileScript)&Grove01::onOpenChest;
+    scripts[StringView("well")] = (TileScript)&Grove01::onWell;
+    scripts[StringView("open_chest")] = (TileScript)&Grove01::onOpenChest;
 }
 
 void
@@ -73,7 +74,7 @@ Grove01::onWell(Entity&, Tile&) noexcept {
 
     playSoundEffect("sounds/splash.oga");
 
-    timerProgressAndThen(
+    add(new InProgressTimer(
             1000,
             [this, maxAlpha](double percent) {
                 uint8_t alpha;
@@ -88,7 +89,7 @@ Grove01::onWell(Entity&, Tile&) noexcept {
             [this, maxAlpha]() {
                 area->setColorOverlay(0, 0, 0, 0);
                 drinking = false;
-            });
+            }));
 }
 
 void

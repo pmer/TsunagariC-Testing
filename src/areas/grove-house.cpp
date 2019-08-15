@@ -32,10 +32,10 @@
 #include "util/assert.h"
 
 GroveHouse::GroveHouse() noexcept {
-    scripts["open_door"] = (TileScript)&GroveHouse::onOpenDoor;
-    scripts["sound_armor"] = (TileScript)&GroveHouse::armorSound;
-    scripts["sound_book"] = (TileScript)&GroveHouse::bookSound;
-    scripts["sound_ouch"] = (TileScript)&GroveHouse::ouchSound;
+    scripts[StringView("open_door")] = (TileScript)&GroveHouse::onOpenDoor;
+    scripts[StringView("sound_armor")] = (TileScript)&GroveHouse::armorSound;
+    scripts[StringView("sound_book")] = (TileScript)&GroveHouse::bookSound;
+    scripts[StringView("sound_ouch")] = (TileScript)&GroveHouse::ouchSound;
 }
 
 void
@@ -48,7 +48,7 @@ GroveHouse::onOpenDoor(Entity&, Tile&) noexcept {
 
     // torch which activated this trigger should make "ouch" now
     auto torch_prop = area->grid.getTile(vicoord{6, 0, 0.0});
-    torch_prop->useScript = scripts["sound_ouch"];
+    torch_prop->useScript = scripts[StringView("sound_ouch")];
 
     // closed exit on north wall, property layer
     auto door_prop = area->grid.getTile(vicoord{4, 0, 0.0});

@@ -28,6 +28,8 @@
 
 #include "core/area.h"
 #include "core/player.h"
+#include "data/inprogress-sound.h"
+#include "data/inprogress-timer.h"
 
 /*
 #include <future>
@@ -70,7 +72,7 @@ class TimelineExec {
 */
 
 Cave01::Cave01() noexcept {
-    scripts["sound_ouch"] = (TileScript)&Cave01::ouchSound;
+    scripts[StringView("sound_ouch")] = (TileScript)&Cave01::ouchSound;
 }
 
 void
@@ -91,8 +93,8 @@ Cave01::onLoad() noexcept {
     player.setPhase("up");
     area->setColorOverlay(255, 0, 0, 0);
 
-    playSoundAndThen("sounds/rockfall.oga", [this]() {
-        timerProgressAndThen(
+    add(new InProgressSound("sounds/rockfall.oga", [this]() {
+        add(new InProgressTimer(
                 3000,
                 [this](double percent) {
                     uint8_t alpha = static_cast<uint8_t>(255 - percent * 255);
@@ -101,8 +103,8 @@ Cave01::onLoad() noexcept {
                 [this]() {
                     area->setColorOverlay(0, 0, 0, 0);
                     Player::instance().setFrozen(false);
-                });
-    });
+                }));
+    }));
 }
 
 void

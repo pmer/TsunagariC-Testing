@@ -28,6 +28,7 @@
 #include "world/clouds.h"
 
 #include "core/area.h"
+#include "data/inprogress-timer.h"
 #include "util/random.h"
 #include "util/string.h"
 
@@ -54,7 +55,7 @@ Clouds::createCloudsRegularly(DataArea& dataArea,
                               int minMS,
                               int maxMS) noexcept {
     int millis = randInt(minMS, maxMS);
-    dataArea.timerThen(millis, [this, &dataArea, minMS, maxMS]() {
+    dataArea.add(new InProgressTimer(millis, [this, &dataArea, minMS, maxMS]() {
         ivec3 areaDimensions = dataArea.area->grid.dim;
 
         // Right-hand-side of the Area.
@@ -64,7 +65,7 @@ Clouds::createCloudsRegularly(DataArea& dataArea,
 
         // Repeat.
         createCloudsRegularly(dataArea, minMS, maxMS);
-    });
+    }));
 }
 
 void
@@ -113,7 +114,7 @@ Clouds::createCloudAt(DataArea& dataArea, vicoord tilePosition) noexcept {
                              cloud->getSpeedInPixels() * secondsToMilliseconds);
 
     cloud->drift(ivec2{drift.x, 0});
-    dataArea.timerThen(driftDuration, [this, cloud]() {
+    dataArea.add(new InProgressTimer(driftDuration, [this, cloud]() {
         cloud->destroy();
 
         for (auto it = clouds.begin(); it != clouds.end(); it++) {
@@ -122,5 +123,5 @@ Clouds::createCloudAt(DataArea& dataArea, vicoord tilePosition) noexcept {
                 break;
             }
         }
-    });
+    }));
 }
