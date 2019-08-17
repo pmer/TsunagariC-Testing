@@ -49,9 +49,9 @@ GroveHouse::onOpenDoor(Entity&) noexcept {
     // torch which activated this trigger should make "ouch" now
     icoord torch = area->grid.virt2phys(vicoord{6, 0, 0.0});
     area->grid.scripts[TileGrid::SCRIPT_TYPE_USE][torch] =
-        scripts[StringView("sound_ouch")];
+        (TileScript)&GroveHouse::ouchSound;
 
-    // closed exit on north wall, property layer
+    // closed exit on north wall, object layer
     auto door = area->grid.virt2phys(vicoord{4, 0, 0.0});
     area->grid.exits[EXIT_NORMAL][door] =
         Exit{"areas/secret_room.json", 4, 5, 0.0};
@@ -62,7 +62,8 @@ GroveHouse::onOpenDoor(Entity&) noexcept {
 
     // closed exit on north wall, graphics layer
     // change to open exit
-    area->grid.setTileType(vicoord{4, 0, -0.2}, tileSet->at(2, 9));
+    vicoord doorGraphic = {4, 0, -0.2};
+    area->grid.setTileType(doorGraphic, tileSet->at(2, 9));
 
     area->requestRedraw();
 
