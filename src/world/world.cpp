@@ -60,13 +60,28 @@ TestingDataWorld::TestingDataWorld() noexcept {
     parameters.gameStart.player.file = "entities/player/player.json";
     parameters.gameStart.player.phase = "down";
 
-    parameters.gameStart.area = "areas/grove01.json";
-    parameters.gameStart.coords = {15, 22, 0};
+    StringView area;
+    vicoord coords;
+
+    switch (1) {
+    case 0:
+        area = "areas/basement.json";
+        coords = {2, 3, 0.0};
+        break;
+    case 1:
+        area = "areas/grove01.json";
+        coords = {15, 22, 0.0};
+        break;
+    }
+
+    parameters.gameStart.area = area;
+    parameters.gameStart.coords = coords;
 
     datafile = "./testing.world";
 
-    areas["areas/cave01.json"] = new Cave01;
+    areas["areas/basement.json"] = new DataArea;  // no special logic
     areas["areas/bigtree.json"] = new BigTreeArea;
+    areas["areas/cave01.json"] = new Cave01;
     areas["areas/grove_house.json"] = new GroveHouse;
     areas["areas/grove01.json"] = new Grove01;
     areas["areas/grove04.json"] = new Grove04;
