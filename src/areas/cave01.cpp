@@ -96,7 +96,7 @@ Cave01::onLoad() noexcept {
     add(new InProgressSound("sounds/rockfall.oga", [this]() {
         add(new InProgressTimer(
                 3000,
-                [this](double percent) {
+                [this](float percent) {
                     uint8_t alpha = static_cast<uint8_t>(255 - percent * 255);
                     area->setColorOverlay(alpha, 0, 0, 0);
                 },
