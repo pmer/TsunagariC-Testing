@@ -246,12 +246,12 @@
     "orientation": "orthogonal",
     "properties": {
         "color_overlay": "150,0,10,30",
-        "main_music": "",
+        "music": "",
         "name": "Basement"
     },
     "propertytypes": {
         "color_overlay": "string",
-        "main_music": "string",
+        "music": "string",
         "name": "string"
     },
     "renderorder": "right-down",
